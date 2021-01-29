@@ -19,22 +19,7 @@ public class Inventory : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.M))
-		{
-			CollectArtifact(0);
-		}
-		if (Input.GetKeyDown(KeyCode.N))
-		{
-			CollectArtifact(1);
-		}
-		if (Input.GetKeyDown(KeyCode.B))
-		{
-			CollectArtifact(2);
-		}
-		if (Input.GetKeyDown(KeyCode.V))
-		{
-			CollectArtifact(3);
-		}
+
 	}
 
 	public bool HasArtifact(int _index)
