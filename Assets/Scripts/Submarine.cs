@@ -16,6 +16,11 @@ public class Submarine : MonoBehaviour
 	public float SonarPingDuration;
 	private float sonarPingTimer;
 
+	public int TorpedoArtifactNumber;
+	public GameObject TorpedoPrefab;
+	public float TorpedoCooldownTime;
+	private float torpedoCooldownTimer;
+
 	[Header("Movement")]
 	public float maxSpeed = 5;
 	public float maxPitchSpeed = 3;
@@ -47,11 +52,15 @@ public class Submarine : MonoBehaviour
 
 	void Update()
 	{
-		UpdateControls();
+		UpdateMovement();
 		UpdateSonarPing();
+		UpdateShootTorpedoes();
 	}
 
-	private void UpdateControls()
+	/// <summary>
+	/// Reads input from the player for controlling the direction and speed of the submarine.
+	/// </summary>
+	private void UpdateMovement()
 	{
 		float accelDir = 0;
 		if (Input.GetKey(KeyCode.Q))
@@ -109,10 +118,34 @@ public class Submarine : MonoBehaviour
 		{
 			SonarPingTransform.gameObject.SetActive(false);
 
-			if (Input.GetKeyDown(KeyCode.Space))
+			if (Input.GetKeyDown(KeyCode.P))
 			{
 				sonarPingTimer = SonarPingDuration;
 			}
+		}
+	}
+
+	/// <summary>
+	/// Checks for input to spawn torpedoes and handles instanstiation and setup, along with cooldown.
+	/// </summary>
+	private void UpdateShootTorpedoes()
+	{
+		//if (!myInventory.HasArtifact(TorpedoArtifactNumber))
+		//{
+		//	return;
+		//}
+
+		if (Input.GetKeyDown(KeyCode.Space) && torpedoCooldownTimer <= 0f)
+		{
+			Transform torpedo = Instantiate(TorpedoPrefab).transform;
+			torpedo.position = transform.position;
+			torpedo.rotation = transform.rotation;
+			torpedoCooldownTimer = TorpedoCooldownTime;
+		}
+
+		if (torpedoCooldownTimer > 0f)
+		{
+			torpedoCooldownTimer -= Time.deltaTime;
 		}
 	}
 }
