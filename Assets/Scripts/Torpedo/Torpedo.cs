@@ -9,8 +9,6 @@ public class Torpedo : MonoBehaviour
 	public float MoveSpeed;
 	public float TrackingSpeed;
 	public float MaxTime;
-	public float HeatSeekingAccuracyRequired = 0.7f;
-	public float HeatSeekingRange = 30.0f;
 	private float timer;
 
 	private bool hasTarget;
@@ -31,7 +29,6 @@ public class Torpedo : MonoBehaviour
 			DestroyTorpedo();
 		}
 
-		UpdateTarget();
 		UpdateMovement();
 	}
 
@@ -41,32 +38,6 @@ public class Torpedo : MonoBehaviour
 	private void OnCollisionEnter(Collision collision)
 	{
 		DestroyTorpedo();
-	}
-
-	/// <summary>
-	/// Finds a target for the torpedo
-	/// </summary>
-	private void UpdateTarget()
-	{
-		if(hasTarget)
-		{
-			if(target == null) SetTarget(null); // Double check, because without this, it was throwing errors when one torpedo kills a shark
-
-			return;
-		}
-
-		var heatSeekables = FindObjectsOfType<TorpedoTarget>()
-								.Select(x => ((MonoBehaviour)x).gameObject)
-								.Where(x => 
-								{
-									Vector3 toTarget = (x.transform.position - transform.position);
-
-									return toTarget.magnitude < HeatSeekingRange
-											&& Vector3.Dot(toTarget.normalized, transform.forward) > HeatSeekingAccuracyRequired;
-								} );
-		
-		GameObject newTarget = heatSeekables.FirstOrDefault();
-		if(newTarget != null) SetTarget( newTarget.transform );
 	}
 
 	/// <summary>
