@@ -11,7 +11,6 @@ public class Torpedo : MonoBehaviour
 	public float MaxTime;
 	private float timer;
 
-	private bool hasTarget;
 	private Transform target;
 
 	// Start is called before the first frame update
@@ -49,7 +48,7 @@ public class Torpedo : MonoBehaviour
 		transform.Translate(0f, 0f, MoveSpeed * Time.deltaTime, Space.Self);
 
 		// Look towards a target if applicable.
-		if (hasTarget)
+		if (target != null)
 		{
 			Vector3 toTarget = (target.position - transform.position).normalized;
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(toTarget, Vector3.up), TrackingSpeed * Time.deltaTime);
@@ -70,6 +69,5 @@ public class Torpedo : MonoBehaviour
 	public void SetTarget(Transform _target)
 	{
 		target = _target;
-		hasTarget = _target != null;
 	}
 }
