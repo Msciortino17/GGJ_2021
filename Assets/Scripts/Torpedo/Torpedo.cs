@@ -9,7 +9,8 @@ public class Torpedo : MonoBehaviour
 	public float MoveSpeed;
 	public float TrackingSpeed;
 	public float MaxTime;
-	public float HeatSeakingAccuracyRequired = 0.5f;
+	public float HeatSeakingAccuracyRequired = 0.7f;
+	public float HeatSeakingRange = 30.0f;
 	private float timer;
 
 	private bool hasTarget;
@@ -42,23 +43,31 @@ public class Torpedo : MonoBehaviour
 		DestroyTorpedo();
 	}
 
+	/// <summary>
+	/// Finds a target for the torpedo
+	/// </summary>
 	private void UpdateTarget()
 	{
-		if(hasTarget) return;
+		if(hasTarget)
+		{
+			if(target == null) SetTarget(null); // Double check, because without this, it was throwing errors when one torpedo kills a shark
 
-		IEnumerable<GameObject> heatSeakables = FindObjectsOfType<MonoBehaviour>()
-													.OfType<IHeatSeakable>()
-													.Select(x => ((MonoBehaviour)x).gameObject)
-													.Where(x => 
-													{
-														Vector3 toTarget = (x.transform.position - transform.position);
+			return;
+		}
 
-														return toTarget.magnitude < 20
-														       && Vector3.Dot(toTarget.normalized, transform.forward) > HeatSeakingAccuracyRequired;
-													} );
+		var heatSeakables = FindObjectsOfType<MonoBehaviour>()
+								.OfType<IHeatSeakable>()
+								.Select(x => ((MonoBehaviour)x).gameObject)
+								.Where(x => 
+								{
+									Vector3 toTarget = (x.transform.position - transform.position);
+
+									return toTarget.magnitude < HeatSeakingRange
+											&& Vector3.Dot(toTarget.normalized, transform.forward) > HeatSeakingAccuracyRequired;
+								} );
 		
-		GameObject target = heatSeakables.FirstOrDefault();
-		if(target != null) SetTarget( target.transform );
+		GameObject newTarget = heatSeakables.FirstOrDefault();
+		if(newTarget != null) SetTarget( newTarget.transform );
 	}
 
 	/// <summary>
@@ -91,6 +100,6 @@ public class Torpedo : MonoBehaviour
 	public void SetTarget(Transform _target)
 	{
 		target = _target;
-		hasTarget = true;
+		hasTarget = _target != null;
 	}
 }

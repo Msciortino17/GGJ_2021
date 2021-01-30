@@ -97,7 +97,6 @@ public class Shark : MonoBehaviour, IHeatSeakable
         if(torpedo != null)
         {
             Destroy(gameObject, 0.5f);
-            Destroy(torpedo, 0.0f);
             
             Dead = true;
         }
