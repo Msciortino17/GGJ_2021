@@ -6,7 +6,7 @@ public class CollectableArtifact : MonoBehaviour
 {
 	public int ArtifactIndex;
 	public HUD hudReference;
-	public string DialogueMessage;
+	public string[] DialogueMessages;
 
 	// Start is called before the first frame update
 	void Start()
@@ -29,7 +29,10 @@ public class CollectableArtifact : MonoBehaviour
 		{
 			Inventory inventory = other.GetComponent<Inventory>();
 			inventory.CollectArtifact(ArtifactIndex);
-			hudReference.AddDialogue(DialogueMessage);
+			for (int i = 0; i < DialogueMessages.Length; i++)
+			{
+				hudReference.AddDialogue(DialogueMessages[i]);
+			}
 			Destroy(gameObject);
 		}
 	}
