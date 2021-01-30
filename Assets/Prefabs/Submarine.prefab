@@ -672,6 +672,8 @@ MonoBehaviour:
   Health: 100
   lowHealthThreshold: 0.4
   alertAudio: {fileID: 1466327381}
+  HealthRegen: 5
+  hudReference: {fileID: 0}
   SonarPingArtifactNumber: 0
   SonarPingTransform: {fileID: 636830933500574721}
   SonarPingSize: 15
@@ -681,9 +683,9 @@ MonoBehaviour:
   TorpedoPrefab: {fileID: 7754995367316878487, guid: 48135086f15c91b4a9375d30679e7401, type: 3}
   TorpedoCooldownTime: 3
   torpedoAudio: {fileID: 1466327383}
-  DeepWaterArtifactNumber: 0
-  DeepWaterDepth: 0
-  DeepWaterDamage: 0
+  DeepWaterArtifactNumber: 2
+  DeepWaterDepth: 160
+  DeepWaterDamage: 10
   maxSpeed: 5
   maxPitchSpeed: 50
   maxTurnSpeed: 80

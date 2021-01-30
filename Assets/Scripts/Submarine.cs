@@ -8,9 +8,11 @@ public class Submarine : MonoBehaviour
 	private Inventory myInventory;
 
 	public float Health;
+	public float HealthRegen;
 	private float maxHealth;
 	public float lowHealthThreshold;
 	public AudioSource alertAudio;
+	public HUD hudReference;
 
 	[Header("Abilities")]
 	public int SonarPingArtifactNumber;
@@ -69,11 +71,12 @@ public class Submarine : MonoBehaviour
 		UpdateSonarPing();
 		UpdateShootTorpedoes();
 		UpdateTooDeep();
+		UpdateHealth();
 
 		// temp testing
 		if (Input.GetKeyDown(KeyCode.J))
 		{
-			TakeDamage(-10f);
+			TakeDamage(10f);
 		}
 	}
 
@@ -138,7 +141,7 @@ public class Submarine : MonoBehaviour
 		{
 			SonarPingTransform.gameObject.SetActive(false);
 
-			if (Input.GetKeyDown(KeyCode.P))
+			if (Input.GetKeyDown(KeyCode.C))
 			{
 				sonarPingTimer = SonarPingDuration;
 				sonarAudio.Play();
@@ -185,6 +188,28 @@ public class Submarine : MonoBehaviour
 		if (transform.position.y < DeepWaterDepth)
 		{
 			TakeDamage( DeepWaterDamage * Time.deltaTime );
+
+			if (hudReference.DialogueEmpty())
+			{
+				hudReference.AddDialogue("WARNING: Water pressure too great at this depth.");
+			}
+		}
+	}
+
+	/// <summary>
+	/// Passively regenerates health, and checks for death.
+	/// </summary>
+	private void UpdateHealth()
+	{
+		Health += HealthRegen * Time.deltaTime;
+		if (Health > maxHealth)
+		{
+			Health = maxHealth;
+		}
+
+		if (Health <= 0f)
+		{
+			// todo - game over
 		}
 	}
 

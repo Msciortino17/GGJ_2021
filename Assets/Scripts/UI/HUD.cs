@@ -20,6 +20,10 @@ public class HUD : MonoBehaviour
 	void Start()
 	{
 		Init();
+
+		AddDialogue("I don't remember much... Who I am, or how we ended up in this submerged cave system.");
+		AddDialogue("All I know is that I am the captain of this submarine, and we are trying to find the lost city of Atlantis.");
+		AddDialogue("Perhaps finding some Atlantian artifacts will shed light on our situation...");
 	}
 
 	/// <summary>
@@ -102,5 +106,13 @@ public class HUD : MonoBehaviour
 	public void AddDialogue(string _message)
 	{
 		dialogueQueue.Enqueue(_message);
+	}
+
+	/// <summary>
+	/// Checks if there are no dialogues loaded into the queue.
+	/// </summary>
+	public bool DialogueEmpty()
+	{
+		return dialogueQueue.Count == 0;
 	}
 }
