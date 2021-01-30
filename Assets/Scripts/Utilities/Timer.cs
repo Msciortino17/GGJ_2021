@@ -10,6 +10,10 @@ public class Timer
         time_sec += Time.deltaTime;
     }
 
+    public void SetTime(float time_sec) {
+        this.time_sec = time_sec;
+    }
+
     public void Reset() {
         time_sec = 0;
     }
