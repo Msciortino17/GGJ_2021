@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Submarine : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class Submarine : MonoBehaviour
 	public float lowHealthThreshold;
 	public AudioSource alertAudio;
 	public HUD hudReference;
+
+	private bool gameFinished;
+	private float gameOverTimer;
 
 	[Header("Abilities")]
 	public int SonarPingArtifactNumber;
@@ -67,16 +71,44 @@ public class Submarine : MonoBehaviour
 
 	void Update()
 	{
-		UpdateMovement();
-		UpdateSonarPing();
-		UpdateShootTorpedoes();
-		UpdateTooDeep();
-		UpdateHealth();
+		if (!gameFinished)
+		{
+			UpdateMovement();
+			UpdateSonarPing();
+			UpdateShootTorpedoes();
+			UpdateTooDeep();
+			UpdateHealth();
+		}
+		UpdateGameOver();
 
 		// temp testing
 		if (Input.GetKeyDown(KeyCode.J))
 		{
 			TakeDamage(10f);
+		}
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("Castle") && !myInventory.HasArtifact(3))
+		{
+			hudReference.AddDialogue("This is the gate to Atlantis! It seems the door will only open for an Atlantian...", 8f);
+		}
+		else if (other.GetComponent<FinalGate>() != null)
+		{
+			gameFinished = true;
+			gameOverTimer = 65f;
+
+			hudReference.FadeBlack(1.1f, 1f);
+			hudReference.AddDialogue("", 2f);
+			hudReference.AddDialogue("Ah, so this is what happened to Atlantis. How sad...", 8f);
+			hudReference.AddDialogue("They perfected their technology and became an ideal civilization.", 8f);
+			hudReference.AddDialogue("However, fate kept them bound to the sea and they would never set foot on land.", 8f);
+			hudReference.AddDialogue("With no more problems to solve or goals to reach for, a horrible despair cursed the Atlantians.", 8f);
+			hudReference.AddDialogue("They all chose to end their lives rather than live empty ones.", 8f);
+			hudReference.AddDialogue("And now they are but relics to us surface dwellers.", 8f);
+			hudReference.AddDialogue("I can only pray that humanity is spared a similar fate...", 8f);
+			hudReference.AddDialogue("The End. Thanks for playing!", 8f);
 		}
 	}
 
@@ -209,7 +241,27 @@ public class Submarine : MonoBehaviour
 
 		if (Health <= 0f)
 		{
-			// todo - game over
+			gameFinished = true;
+			gameOverTimer = 8f;
+
+			hudReference.FadeBlack(1.1f, 1f);
+			hudReference.AddDialogue("", 1f);
+			hudReference.AddDialogue("We're taking on water, we're finished... It seems the sea floor will be our tomb.", 6f);
+		}
+	}
+
+	/// <summary>
+	/// If the game is finished, begin counting down. Once all the way, load the main menu scene.
+	/// </summary>
+	private void UpdateGameOver()
+	{
+		if (gameFinished)
+		{
+			gameOverTimer -= Time.deltaTime;
+			if (gameOverTimer < 0f)
+			{
+				SceneManager.LoadScene("MainMenu");
+			}
 		}
 	}
 
