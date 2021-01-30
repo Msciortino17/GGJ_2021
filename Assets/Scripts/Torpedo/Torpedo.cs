@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+
 using UnityEngine;
 
 public class Torpedo : MonoBehaviour
@@ -7,6 +9,7 @@ public class Torpedo : MonoBehaviour
 	public float MoveSpeed;
 	public float TrackingSpeed;
 	public float MaxTime;
+	public float HeatSeakingAccuracyRequired = 0.5f;
 	private float timer;
 
 	private bool hasTarget;
@@ -27,6 +30,7 @@ public class Torpedo : MonoBehaviour
 			DestroyTorpedo();
 		}
 
+		UpdateTarget();
 		UpdateMovement();
 	}
 
@@ -36,6 +40,25 @@ public class Torpedo : MonoBehaviour
 	private void OnCollisionEnter(Collision collision)
 	{
 		DestroyTorpedo();
+	}
+
+	private void UpdateTarget()
+	{
+		if(hasTarget) return;
+
+		IEnumerable<GameObject> heatSeakables = FindObjectsOfType<MonoBehaviour>()
+													.OfType<IHeatSeakable>()
+													.Select(x => ((MonoBehaviour)x).gameObject)
+													.Where(x => 
+													{
+														Vector3 toTarget = (x.transform.position - transform.position);
+
+														return toTarget.magnitude < 20
+														       && Vector3.Dot(toTarget.normalized, transform.forward) > HeatSeakingAccuracyRequired;
+													} );
+		
+		GameObject target = heatSeakables.FirstOrDefault();
+		if(target != null) SetTarget( target.transform );
 	}
 
 	/// <summary>
