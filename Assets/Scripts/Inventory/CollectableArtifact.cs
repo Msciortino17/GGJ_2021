@@ -5,6 +5,8 @@ using UnityEngine;
 public class CollectableArtifact : MonoBehaviour
 {
 	public int ArtifactIndex;
+	public HUD hudReference;
+	public string DialogueMessage;
 
 	// Start is called before the first frame update
 	void Start()
@@ -27,6 +29,7 @@ public class CollectableArtifact : MonoBehaviour
 		{
 			Inventory inventory = other.GetComponent<Inventory>();
 			inventory.CollectArtifact(ArtifactIndex);
+			hudReference.AddDialogue(DialogueMessage);
 			Destroy(gameObject);
 		}
 	}
