@@ -9,6 +9,8 @@ public class Submarine : MonoBehaviour
 
 	public float Health;
 	private float maxHealth;
+	public float lowHealthThreshold;
+	public AudioSource alertAudio;
 
 	[Header("Abilities")]
 	public int SonarPingArtifactNumber;
@@ -18,11 +20,13 @@ public class Submarine : MonoBehaviour
 	private Vector3 sonarPingFinalSize;
 	public float SonarPingDuration;
 	private float sonarPingTimer;
+	public AudioSource sonarAudio;
 
 	public int TorpedoArtifactNumber;
 	public GameObject TorpedoPrefab;
 	public float TorpedoCooldownTime;
 	private float torpedoCooldownTimer;
+	public AudioSource torpedoAudio;
 
 	public int DeepWaterArtifactNumber;
 	public float DeepWaterDepth;
@@ -40,6 +44,7 @@ public class Submarine : MonoBehaviour
 	public Transform rudderYaw;
 	public float propellerSpeedFac = 2;
 	public float rudderAngle = 30;
+	public AudioSource engineAudio;
 
 	Vector3 velocity;
 	float yawVelocity;
@@ -136,6 +141,7 @@ public class Submarine : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.P))
 			{
 				sonarPingTimer = SonarPingDuration;
+				sonarAudio.Play();
 			}
 		}
 	}
@@ -156,6 +162,8 @@ public class Submarine : MonoBehaviour
 			torpedo.position = transform.position;
 			torpedo.rotation = transform.rotation;
 			torpedoCooldownTimer = TorpedoCooldownTime;
+			torpedoAudio.pitch = Random.Range(0.9f, 1.1f);
+			torpedoAudio.Play();
 		}
 
 		if (torpedoCooldownTimer > 0f)
@@ -194,5 +202,9 @@ public class Submarine : MonoBehaviour
 	public void TakeDamage(float damage)
 	{
 		Health -= damage;
+		if(GetHealthRatio() < lowHealthThreshold)
+        {
+			alertAudio.Play();
+        }
 	}
 }
