@@ -34,7 +34,6 @@ Transform:
   - {fileID: 4793401074657023478}
   - {fileID: 1511566003695735601}
   - {fileID: 5950078463038949720}
-  - {fileID: 3607344274109121857}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -51,7 +50,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bite: {fileID: 7145774684416670502}
-  PatrolPoint: {fileID: 8351250627237770187}
   Acceleration: 0.2
   Speed: 8
   RotationSpeed: 1
@@ -59,7 +57,9 @@ MonoBehaviour:
   BiteRate_sec: 5
   BiteTriggerRange: 4
   BiteAccuracyRequired: 0.8
-  AggroRange: 30
+  AggroRange: 60
+  PatrolRange: 10
+  PatrolPointRange: 4
 --- !u!54 &4081901944694683706
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -455,33 +455,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 25
---- !u!1 &8351250627237770187
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3607344274109121857}
-  m_Layer: 12
-  m_Name: PatrolPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3607344274109121857
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8351250627237770187}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2446740104051280892}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -40,8 +40,9 @@ public class SharkNest : MonoBehaviour
 
         Shark shark = Instantiate(SharkPrefab, SpawnPoint.position, Quaternion.LookRotation(toPlayer, Vector3.up)).GetComponent<Shark>();
 
-        shark.SetTargetAndState(Submarine, Shark.SharkState.Aggro);
         shark.SetSharkNest(this);
+        shark.SetPlayer(Submarine);
+        shark.SetState(Shark.SharkState.Aggro);
 
         SharksSpawned++;
     }
