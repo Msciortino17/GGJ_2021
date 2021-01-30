@@ -55,8 +55,7 @@ public class Torpedo : MonoBehaviour
 			return;
 		}
 
-		var heatSeekables = FindObjectsOfType<MonoBehaviour>()
-								.OfType<IHeatSeekable>()
+		var heatSeekables = FindObjectsOfType<TorpedoTarget>()
 								.Select(x => ((MonoBehaviour)x).gameObject)
 								.Where(x => 
 								{
