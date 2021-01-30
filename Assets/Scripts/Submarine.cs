@@ -7,6 +7,9 @@ public class Submarine : MonoBehaviour
 	private Rigidbody myRigidBody;
 	private Inventory myInventory;
 
+	public float Health;
+	private float maxHealth;
+
 	[Header("Abilities")]
 	public int SonarPingArtifactNumber;
 	public Transform SonarPingTransform;
@@ -42,6 +45,7 @@ public class Submarine : MonoBehaviour
 
 	void Start()
 	{
+		maxHealth = Health;
 		currentSpeed = maxSpeed;
 		myRigidBody = GetComponent<Rigidbody>();
 		myInventory = GetComponent<Inventory>();
@@ -147,5 +151,13 @@ public class Submarine : MonoBehaviour
 		{
 			torpedoCooldownTimer -= Time.deltaTime;
 		}
+	}
+
+	/// <summary>
+	/// Simple ratio of current health to max health.
+	/// </summary>
+	public float GetHealthRatio()
+	{
+		return Health / maxHealth;
 	}
 }

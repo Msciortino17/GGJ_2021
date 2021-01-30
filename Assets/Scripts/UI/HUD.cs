@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class HUD : MonoBehaviour
 {
 	[SerializeField] private Inventory playerInventory;
+	[SerializeField] private Submarine submarine;
+	[SerializeField] private RectTransform healthBar;
+	private float fullHealthWidth;
 
 	public GameObject[] ArtifactIcons;
 
@@ -25,6 +28,8 @@ public class HUD : MonoBehaviour
 		{
 			ArtifactIcons[i].SetActive(false);
 		}
+
+		fullHealthWidth = healthBar.sizeDelta.x;
 	}
 
 	// Update is called once per frame
@@ -42,5 +47,15 @@ public class HUD : MonoBehaviour
 		{
 			ArtifactIcons[i].SetActive(playerInventory.HasArtifact(i));
 		}
+	}
+
+	/// <summary>
+	/// Updates the size of the health bar depending on the submarine's current health.
+	/// </summary>
+	private void UpdateHealthBar()
+	{
+		Vector2 healthSize = healthBar.sizeDelta;
+		healthSize.x = fullHealthWidth * submarine.GetHealthRatio();
+		healthBar.sizeDelta = healthSize;
 	}
 }

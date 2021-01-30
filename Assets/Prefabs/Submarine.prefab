@@ -667,11 +667,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SonarPingArtifactNumber: 0
   SonarPingTransform: {fileID: 636830933500574721}
-  SonarPingSize: 10
-  SonarPingDuration: 3
-  TorpedoArtifactNumber: 0
-  TorpedoPrefab: {fileID: 0}
-  TorpedoCooldownTime: 0
+  SonarPingSize: 15
+  SonarPingDuration: 1
+  TorpedoArtifactNumber: 1
+  TorpedoPrefab: {fileID: 7754995367316878487, guid: 48135086f15c91b4a9375d30679e7401, type: 3}
+  TorpedoCooldownTime: 3
   maxSpeed: 5
   maxPitchSpeed: 50
   maxTurnSpeed: 80

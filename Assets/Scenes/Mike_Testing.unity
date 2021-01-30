@@ -1339,26 +1339,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Submarine
       objectReference: {fileID: 0}
-    - target: {fileID: 2752238164780905606, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
-      propertyPath: SonarPingSize
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2752238164780905606, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
-      propertyPath: TorpedoPrefab
-      value: 
-      objectReference: {fileID: 7754995367316878487, guid: 48135086f15c91b4a9375d30679e7401, type: 3}
-    - target: {fileID: 2752238164780905606, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
-      propertyPath: SonarPingDuration
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2752238164780905606, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
-      propertyPath: TorpedoCooldownTime
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2752238164780905606, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
-      propertyPath: TorpedoArtifactNumber
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2752238164780905607, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1401,10 +1381,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2752238164780905607, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4320070369978315351, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
