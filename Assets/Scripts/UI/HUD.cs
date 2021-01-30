@@ -9,6 +9,9 @@ public class HUD : MonoBehaviour
 	[SerializeField] private Submarine submarine;
 	[SerializeField] private RectTransform healthBar;
 	[SerializeField] private Text dialogueText;
+	[SerializeField] private Image blackBackdrop;
+	private float targetBlackAlpha;
+	private float blackFadeSpeed;
 	private float fullHealthWidth;
 	private Queue<string> dialogueQueue = new Queue<string>();
 	private Queue<float> dialogueTimeQueue = new Queue<float>();
@@ -20,11 +23,6 @@ public class HUD : MonoBehaviour
 	void Start()
 	{
 		Init();
-
-		AddDialogue("", 2f);
-		AddDialogue("I don't remember much... Who I am, or how we ended up in this submerged cave system.", 8f);
-		AddDialogue("All I know is that I am the captain of this submarine, and we are trying to find the lost city of Atlantis.", 8f);
-		AddDialogue("Perhaps finding some Atlantian artifacts will shed light on our situation...", 8f);
 	}
 
 	/// <summary>
@@ -39,6 +37,13 @@ public class HUD : MonoBehaviour
 		}
 
 		fullHealthWidth = healthBar.sizeDelta.x;
+
+		AddDialogue("", 2f);
+		AddDialogue("I don't remember much... Who I am, or how we ended up in this submerged cave system.", 8f);
+		AddDialogue("All I know is that I am the captain of this submarine, and we are trying to find the lost city of Atlantis.", 8f);
+		AddDialogue("Perhaps finding some Atlantian artifacts will shed light on our situation...", 8f);
+
+		FadeBlack(0f, 0.5f);
 	}
 
 	// Update is called once per frame
@@ -46,6 +51,7 @@ public class HUD : MonoBehaviour
 	{
 		UpdateHealthBar();
 		UpdateDialogue();
+		UpdateFadeBlack();
 	}
 
 	/// <summary>
@@ -116,5 +122,33 @@ public class HUD : MonoBehaviour
 	public bool DialogueEmpty()
 	{
 		return dialogueQueue.Count == 0;
+	}
+
+	/// <summary>
+	/// Will change the target alpha and speed for the black backdrop.
+	/// </summary>
+	public void FadeBlack(float _alpha, float _speed = 1f)
+	{
+		targetBlackAlpha = _alpha;
+		blackFadeSpeed = _speed;
+	}
+
+	/// <summary>
+	/// Handles changing the black backdrop's color
+	/// </summary>
+	private void UpdateFadeBlack()
+	{
+		Color color = blackBackdrop.color;
+		
+		if (color.a > targetBlackAlpha)
+		{
+			color.a -= blackFadeSpeed * Time.deltaTime;
+		}
+		else if (color.a < targetBlackAlpha)
+		{
+			color.a += blackFadeSpeed * Time.deltaTime;
+		}
+
+		blackBackdrop.color = color;
 	}
 }
