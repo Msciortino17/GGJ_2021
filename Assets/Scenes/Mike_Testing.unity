@@ -1339,6 +1339,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Submarine
       objectReference: {fileID: 0}
+    - target: {fileID: 2752238164780905606, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
+      propertyPath: Health
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2752238164780905607, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1385,6 +1389,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
+--- !u!114 &2071438265 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2752238164780905606, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
+  m_PrefabInstance: {fileID: 2071438264}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb7e69fd4f0c349d8b3ac8ff30359d3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7275553108868706913
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1392,6 +1407,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7275553108375399679, guid: df0d4e07e115d524ab6e6ff7602753d6, type: 3}
+      propertyPath: submarine
+      value: 
+      objectReference: {fileID: 2071438265}
     - target: {fileID: 7275553108375399679, guid: df0d4e07e115d524ab6e6ff7602753d6, type: 3}
       propertyPath: playerInventory
       value: 

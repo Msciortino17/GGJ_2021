@@ -59,6 +59,12 @@ public class Submarine : MonoBehaviour
 		UpdateMovement();
 		UpdateSonarPing();
 		UpdateShootTorpedoes();
+
+		// temp testing
+		if (Input.GetKeyDown(KeyCode.J))
+		{
+			Health -= 10f;
+		}
 	}
 
 	/// <summary>
