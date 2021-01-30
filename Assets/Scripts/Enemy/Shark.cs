@@ -9,9 +9,9 @@ public class Shark : MonoBehaviour
 
     public GameObject Bite;
 
-    public float Acceleration = 1f;
-    public float Speed = 15.0f;
-    public float RotationSpeed = 3.0f;
+    public float Acceleration;
+    public float Speed;
+    public float RotationSpeed;
 
     public float BiteForce = 5.0f;
     public float BiteRate_sec = 5.0f;
@@ -39,7 +39,7 @@ public class Shark : MonoBehaviour
             Vector3 toPlayer = Target.transform.position - transform.position;
             Vector3 toPlayerUnit = toPlayer.normalized;
 
-            float straightRatio = Vector3.Dot(toPlayerUnit, transform.forward);
+            float straightRatio = Mathf.Max( 0.2f, Mathf.Abs(Vector3.Dot(toPlayerUnit, transform.forward)));
 
             // Move To
             rigidBody.velocity = transform.forward * Speed * straightRatio;
