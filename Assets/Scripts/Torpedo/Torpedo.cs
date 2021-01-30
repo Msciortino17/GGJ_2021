@@ -11,6 +11,7 @@ public class Torpedo : MonoBehaviour
 	public float MaxTime;
 	private float timer;
 
+	public GameObject BoomPrefab;
 	private Transform target;
 
 	// Start is called before the first frame update
@@ -36,6 +37,8 @@ public class Torpedo : MonoBehaviour
 	/// </summary>
 	private void OnCollisionEnter(Collision collision)
 	{
+		Transform boom = Instantiate(BoomPrefab).transform;
+		boom.position = transform.position;
 		DestroyTorpedo();
 	}
 

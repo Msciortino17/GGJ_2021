@@ -219,5 +219,4 @@ MonoBehaviour:
   MoveSpeed: 10
   TrackingSpeed: 5
   MaxTime: 5
-  HeatSeakingAccuracyRequired: 0.9
-  HeatSeakingRange: 30
+  BoomPrefab: {fileID: 7757758110591775711, guid: 2f61ce76266e79e489dd46a0d650c361, type: 3}
