@@ -665,6 +665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb7e69fd4f0c349d8b3ac8ff30359d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Health: 100
   SonarPingArtifactNumber: 0
   SonarPingTransform: {fileID: 636830933500574721}
   SonarPingSize: 15
@@ -672,6 +673,9 @@ MonoBehaviour:
   TorpedoArtifactNumber: 1
   TorpedoPrefab: {fileID: 7754995367316878487, guid: 48135086f15c91b4a9375d30679e7401, type: 3}
   TorpedoCooldownTime: 3
+  DeepWaterArtifactNumber: 0
+  DeepWaterDepth: 0
+  DeepWaterDamage: 0
   maxSpeed: 5
   maxPitchSpeed: 50
   maxTurnSpeed: 80

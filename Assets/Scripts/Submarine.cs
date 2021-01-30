@@ -68,7 +68,7 @@ public class Submarine : MonoBehaviour
 		// temp testing
 		if (Input.GetKeyDown(KeyCode.J))
 		{
-			Health -= 10f;
+			TakeDamage(-10f);
 		}
 	}
 
@@ -176,7 +176,7 @@ public class Submarine : MonoBehaviour
 
 		if (transform.position.y < DeepWaterDepth)
 		{
-			Health -= DeepWaterDamage * Time.deltaTime;
+			TakeDamage( DeepWaterDamage * Time.deltaTime );
 		}
 	}
 
@@ -186,5 +186,13 @@ public class Submarine : MonoBehaviour
 	public float GetHealthRatio()
 	{
 		return Health / maxHealth;
+	}
+
+	/// <summary>
+	/// Deals Damage to the player for a certain amount.
+	/// </summary>
+	public void TakeDamage(float damage)
+	{
+		Health -= damage;
 	}
 }

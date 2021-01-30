@@ -14,11 +14,10 @@ public class Shark : MonoBehaviour
     public float RotationSpeed = 13.0f;
 
     public float BiteRate_sec = 5.0f;
-    public float BiteRange = 3.0f;
+    public float BiteTriggerRange = 3.0f;
 
     public float BiteAccuracyRequired = 0.8f;
 
-    // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -46,7 +45,6 @@ public class Shark : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if( Target != null)
@@ -64,7 +62,7 @@ public class Shark : MonoBehaviour
                 float biteAccuracy = Vector3.Dot(toPlayerUnit, transform.forward);
                 BiteRestTimer.Interval();
                 if( BiteRestTimer.Seconds >= BiteRate_sec
-                    && toPlayer.magnitude < BiteRange
+                    && toPlayer.magnitude < BiteTriggerRange
                     && biteAccuracy > BiteAccuracyRequired )
                 {
                     Biting = true;
