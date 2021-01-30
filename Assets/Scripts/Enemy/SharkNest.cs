@@ -14,7 +14,7 @@ public class SharkNest : MonoBehaviour
 
     private void Update()
     {
-        if(SubmarineDetected && SharksSpawned < SharksInNest /* && TimerToPrevent Sharks*/)
+        if(SubmarineDetected && SharksSpawned < SharksInNest)
         {
             Timer.Interval();
             if( Timer.Seconds > SpawnRate_sec || SharksSpawned == 0 )
@@ -35,11 +35,15 @@ public class SharkNest : MonoBehaviour
     /// </summary>
     private void SpawnShark()
     {
-            Shark shark = Instantiate(SharkPrefab, SpawnPoint.position, new Quaternion()).GetComponent<Shark>();
+        Vector3 toPlayer = SpawnPoint.forward;
+        if(Submarine != null) toPlayer = Submarine.transform.position - transform.position; 
 
-            if( Submarine != null ) shark.Target = Submarine;
+        Shark shark = Instantiate(SharkPrefab, SpawnPoint.position, Quaternion.LookRotation(toPlayer, Vector3.up)).GetComponent<Shark>();
 
-            SharksSpawned++;
+        shark.SetTargetAndState(Submarine, Shark.SharkState.Aggro);
+        shark.SetSharkNest(this);
+
+        SharksSpawned++;
     }
 
     private void OnTriggerEnter(Collider other)
