@@ -20,12 +20,15 @@ public class Shark : MonoBehaviour
 
         if( rigidBody == null ) return;
 
-        // Move To
-        rigidBody.AddForce(transform.forward * Acceleration, ForceMode.Force);
-
-        if(rigidBody.velocity.magnitude > Speed)
+        if(!Dead)
         {
-            rigidBody.velocity = rigidBody.velocity.normalized * Speed;
+            // Move To
+            rigidBody.AddForce(transform.forward * Acceleration, ForceMode.Force);
+
+            if(rigidBody.velocity.magnitude > Speed)
+            {
+                rigidBody.velocity = rigidBody.velocity.normalized * Speed;
+            }
         }
     }
 
@@ -34,13 +37,33 @@ public class Shark : MonoBehaviour
     {
         if( Target != null)
         {
-            Vector3 toPlayer = Target.transform.position - transform.position;
-            Vector3 toPlayerUnit = toPlayer.normalized;
+            if(!Dead)
+            {
+                Vector3 toPlayer = Target.transform.position - transform.position;
+                Vector3 toPlayerUnit = toPlayer.normalized;
 
-            // Look at target
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(toPlayerUnit, Vector3.up), RotationSpeed * Time.deltaTime);
+                // Look at target
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(toPlayerUnit, Vector3.up), RotationSpeed * Time.deltaTime);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(transform.forward, -Vector3.up), RotationSpeed * Time.deltaTime);
+            }
         }
     }
 
+    private void OnCollisionEnter(Collision other) {
+        
+        Torpedo torpedo = other.gameObject.GetComponent<Torpedo>();
+        if(torpedo != null)
+        {
+            Destroy(gameObject, 0.5f);
+            Destroy(torpedo, 0.0f);
+            
+            Dead = true;
+        }
+    }
+
+    private bool Dead;
     private Rigidbody rigidBody;
 }
