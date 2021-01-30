@@ -153,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArtifactIndex: 3
   hudReference: {fileID: 0}
+  SoundPrefab: {fileID: 6440275269065083780, guid: e3ae72798c9e4ce429925c34e38f3ba8, type: 3}
   DialogueMessages:
   - A fossilized skull of an Atlantian. The thought of seeing a live one before me
     fills me with dread...

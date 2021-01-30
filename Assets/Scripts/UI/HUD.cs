@@ -11,7 +11,7 @@ public class HUD : MonoBehaviour
 	[SerializeField] private Text dialogueText;
 	private float fullHealthWidth;
 	private Queue<string> dialogueQueue = new Queue<string>();
-	public float DialogueTime;
+	private Queue<float> dialogueTimeQueue = new Queue<float>();
 	private float dialogueTimer;
 
 	public GameObject[] ArtifactIcons;
@@ -21,9 +21,10 @@ public class HUD : MonoBehaviour
 	{
 		Init();
 
-		AddDialogue("I don't remember much... Who I am, or how we ended up in this submerged cave system.");
-		AddDialogue("All I know is that I am the captain of this submarine, and we are trying to find the lost city of Atlantis.");
-		AddDialogue("Perhaps finding some Atlantian artifacts will shed light on our situation...");
+		AddDialogue("", 2f);
+		AddDialogue("I don't remember much... Who I am, or how we ended up in this submerged cave system.", 8f);
+		AddDialogue("All I know is that I am the captain of this submarine, and we are trying to find the lost city of Atlantis.", 8f);
+		AddDialogue("Perhaps finding some Atlantian artifacts will shed light on our situation...", 8f);
 	}
 
 	/// <summary>
@@ -78,7 +79,7 @@ public class HUD : MonoBehaviour
 			if (dialogueQueue.Count > 0)
 			{
 				dialogueText.text = dialogueQueue.Dequeue();
-				dialogueTimer = DialogueTime;
+				dialogueTimer = dialogueTimeQueue.Dequeue();
 			}
 		}
 		else
@@ -103,9 +104,10 @@ public class HUD : MonoBehaviour
 	/// <summary>
 	/// Takes in message for the dialogue
 	/// </summary>
-	public void AddDialogue(string _message)
+	public void AddDialogue(string _message, float _time)
 	{
 		dialogueQueue.Enqueue(_message);
+		dialogueTimeQueue.Enqueue(_time);
 	}
 
 	/// <summary>

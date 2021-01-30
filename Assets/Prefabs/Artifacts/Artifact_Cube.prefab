@@ -818,6 +818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArtifactIndex: 1
   hudReference: {fileID: 0}
+  SoundPrefab: {fileID: 6440275269065083780, guid: e3ae72798c9e4ce429925c34e38f3ba8, type: 3}
   DialogueMessages:
   - Somehow this cube is able to repel water with great power.
   - The Atlantians must have used this to reach impressive depths.

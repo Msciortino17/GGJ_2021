@@ -44,8 +44,14 @@ public class MainMenu : MonoBehaviour
 		}
 		MasterMixer.SetFloat("MusicVolume", musicVolume);
 
-		EffectSlider.value = effectVolume;
-		MusicSlider.value = musicVolume;
+		if (EffectSlider != null)
+		{
+			EffectSlider.value = effectVolume;
+		}
+		if (MusicSlider != null)
+		{
+			MusicSlider.value = musicVolume;
+		}
 	}
 
 	// Update is called once per frame

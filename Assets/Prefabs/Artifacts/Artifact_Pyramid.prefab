@@ -61,6 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArtifactIndex: 0
   hudReference: {fileID: 0}
+  SoundPrefab: {fileID: 6440275269065083780, guid: e3ae72798c9e4ce429925c34e38f3ba8, type: 3}
   DialogueMessages:
   - This odd device must have come from Atlantis. I will have our ship's computer
     begin analysis.

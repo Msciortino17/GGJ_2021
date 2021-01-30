@@ -507,6 +507,56 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5334965113722302133, guid: 1c319ed007d359642a73683a1b12322f, type: 3}
   m_PrefabInstance: {fileID: 5334965114356753670}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1063233963
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1063233965}
+  - component: {fileID: 1063233964}
+  m_Layer: 0
+  m_Name: Main Menu (temp)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1063233964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063233963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ea3c45f825a1e448686f608cb41a6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TitleMenu: {fileID: 0}
+  HowToPlayMenu: {fileID: 0}
+  OptionsMenu: {fileID: 0}
+  CreditsMenu: {fileID: 0}
+  MusicSlider: {fileID: 0}
+  EffectSlider: {fileID: 0}
+  MasterMixer: {fileID: 24100000, guid: 8a1b362f6b750a943bbbe38f1eea64c8, type: 2}
+--- !u!4 &1063233965
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063233963}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 421.22473, y: 215.5291, z: 172.61166}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1126887289
 GameObject:
   m_ObjectHideFlags: 0

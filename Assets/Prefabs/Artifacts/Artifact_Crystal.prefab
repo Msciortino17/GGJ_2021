@@ -153,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArtifactIndex: 2
   hudReference: {fileID: 0}
+  SoundPrefab: {fileID: 6440275269065083780, guid: e3ae72798c9e4ce429925c34e38f3ba8, type: 3}
   DialogueMessages:
   - There is immense power within this crystal. The Atlantian legions powered their
     weapons with these.

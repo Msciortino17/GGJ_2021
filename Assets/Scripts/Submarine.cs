@@ -191,7 +191,7 @@ public class Submarine : MonoBehaviour
 
 			if (hudReference.DialogueEmpty())
 			{
-				hudReference.AddDialogue("WARNING: Water pressure too great at this depth.");
+				hudReference.AddDialogue("WARNING: Water pressure too great at this depth.", 2f);
 			}
 		}
 	}
