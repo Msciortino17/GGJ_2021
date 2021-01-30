@@ -219,3 +219,5 @@ MonoBehaviour:
   MoveSpeed: 10
   TrackingSpeed: 5
   MaxTime: 5
+  HeatSeakingAccuracyRequired: 0.9
+  HeatSeakingRange: 30
