@@ -12,13 +12,6 @@ public class SharkNest : MonoBehaviour
 
     public float SpawnRate_sec = 5;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     private void Update()
     {
         if(SubmarineDetected && SharksSpawned < SharksInNest /* && TimerToPrevent Sharks*/)
@@ -37,6 +30,9 @@ public class SharkNest : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Spawns a shark at the spawn point
+    /// </summary>
     private void SpawnShark()
     {
             Shark shark = Instantiate(SharkPrefab, SpawnPoint.position, new Quaternion()).GetComponent<Shark>();
@@ -62,7 +58,6 @@ public class SharkNest : MonoBehaviour
             SubmarineDetected = false;
         }
     }
-
 
     private bool SubmarineDetected;
     private Timer Timer = new Timer();
