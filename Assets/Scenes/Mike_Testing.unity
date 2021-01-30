@@ -380,6 +380,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArtifactIndex: 1
+  hudReference: {fileID: 783395553}
+  DialogueMessage: Found another thing!
 --- !u!135 &263957784
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -520,6 +522,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArtifactIndex: 2
+  hudReference: {fileID: 783395553}
+  DialogueMessage: Look at all these things.
 --- !u!135 &527233545
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -611,7 +615,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 565705706}
   m_LocalRotation: {x: -0, y: -0.6086229, z: -0, w: 0.79345965}
-  m_LocalPosition: {x: -149.06992, y: -24.911636, z: 46.239243}
+  m_LocalPosition: {x: 11.830078, y: 0.94836426, z: 3.139206}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 112540500}
@@ -685,6 +689,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &783395553 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7275553108375399679, guid: df0d4e07e115d524ab6e6ff7602753d6, type: 3}
+  m_PrefabInstance: {fileID: 7275553108868706913}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47adffc69be4d5e47919ea7e96093f0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &927949303
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,6 +822,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArtifactIndex: 0
+  hudReference: {fileID: 783395553}
+  DialogueMessage: Found a thing.
 --- !u!135 &1053887413
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -880,7 +897,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1126887289}
   m_LocalRotation: {x: 0.2118015, y: -0.586539, z: 0.16246232, w: 0.76466864}
-  m_LocalPosition: {x: -149.06992, y: -24.911636, z: 46.239243}
+  m_LocalPosition: {x: 11.830078, y: 0.94836426, z: 3.139206}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1198080997}
@@ -896,6 +913,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de22cce6ae8516b41bcf3a4d6f513352, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1171966323 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1171966323, guid: df0d4e07e115d524ab6e6ff7602753d6, type: 3}
+  m_PrefabInstance: {fileID: 7275553108868706913}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1185475712
@@ -1126,6 +1154,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArtifactIndex: 3
+  hudReference: {fileID: 783395553}
+  DialogueMessage: Where is atlantis?
 --- !u!135 &1338711971
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1361,15 +1391,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2752238164780905607, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 300
+      value: 460.9
       objectReference: {fileID: 0}
     - target: {fileID: 2752238164780905607, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 190.94
+      value: 216.8
       objectReference: {fileID: 0}
     - target: {fileID: 2752238164780905607, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 233.5
+      value: 190.4
       objectReference: {fileID: 0}
     - target: {fileID: 2752238164780905607, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1419,10 +1449,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1171966323, guid: df0d4e07e115d524ab6e6ff7602753d6, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1171966323, guid: df0d4e07e115d524ab6e6ff7602753d6, type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7275553108375399679, guid: df0d4e07e115d524ab6e6ff7602753d6, type: 3}
       propertyPath: submarine
       value: 
       objectReference: {fileID: 2071438265}
+    - target: {fileID: 7275553108375399679, guid: df0d4e07e115d524ab6e6ff7602753d6, type: 3}
+      propertyPath: DialogueTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7275553108375399679, guid: df0d4e07e115d524ab6e6ff7602753d6, type: 3}
+      propertyPath: dialogueText
+      value: 
+      objectReference: {fileID: 1171966323}
     - target: {fileID: 7275553108375399679, guid: df0d4e07e115d524ab6e6ff7602753d6, type: 3}
       propertyPath: playerInventory
       value: 

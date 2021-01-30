@@ -8,7 +8,11 @@ public class HUD : MonoBehaviour
 	[SerializeField] private Inventory playerInventory;
 	[SerializeField] private Submarine submarine;
 	[SerializeField] private RectTransform healthBar;
+	[SerializeField] private Text dialogueText;
 	private float fullHealthWidth;
+	private Queue<string> dialogueQueue = new Queue<string>();
+	public float DialogueTime;
+	private float dialogueTimer;
 
 	public GameObject[] ArtifactIcons;
 
@@ -36,6 +40,7 @@ public class HUD : MonoBehaviour
 	void Update()
 	{
 		UpdateHealthBar();
+		UpdateDialogue();
 	}
 
 	/// <summary>
@@ -57,5 +62,45 @@ public class HUD : MonoBehaviour
 		Vector2 healthSize = healthBar.sizeDelta;
 		healthSize.x = fullHealthWidth * submarine.GetHealthRatio();
 		healthBar.sizeDelta = healthSize;
+	}
+
+	/// <summary>
+	/// This will fade in text and fade it out as things are added.
+	/// </summary>
+	private void UpdateDialogue()
+	{
+		if (dialogueTimer < 0f)
+		{
+			if (dialogueQueue.Count > 0)
+			{
+				dialogueText.text = dialogueQueue.Dequeue();
+				dialogueTimer = DialogueTime;
+			}
+		}
+		else
+		{
+			Color color = dialogueText.color;
+			if (dialogueTimer > 1f)
+			{
+				color.a += Time.deltaTime;
+				color.a = Mathf.Min(color.a, 1f);
+			}
+			else
+			{
+				color.a -= Time.deltaTime;
+				color.a = Mathf.Max(color.a, 0f);
+			}
+			dialogueText.color = color;
+
+			dialogueTimer -= Time.deltaTime;
+		}
+	}
+
+	/// <summary>
+	/// Takes in message for the dialogue
+	/// </summary>
+	public void AddDialogue(string _message)
+	{
+		dialogueQueue.Enqueue(_message);
 	}
 }
