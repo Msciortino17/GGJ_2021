@@ -24,6 +24,10 @@ public class Submarine : MonoBehaviour
 	public float TorpedoCooldownTime;
 	private float torpedoCooldownTimer;
 
+	public int DeepWaterArtifactNumber;
+	public float DeepWaterDepth;
+	public float DeepWaterDamage;
+
 	[Header("Movement")]
 	public float maxSpeed = 5;
 	public float maxPitchSpeed = 3;
@@ -59,6 +63,7 @@ public class Submarine : MonoBehaviour
 		UpdateMovement();
 		UpdateSonarPing();
 		UpdateShootTorpedoes();
+		UpdateTooDeep();
 
 		// temp testing
 		if (Input.GetKeyDown(KeyCode.J))
@@ -156,6 +161,22 @@ public class Submarine : MonoBehaviour
 		if (torpedoCooldownTimer > 0f)
 		{
 			torpedoCooldownTimer -= Time.deltaTime;
+		}
+	}
+
+	/// <summary>
+	/// Checks Y position to see if you're too deep, then applies damage, unless you have the artifact.
+	/// </summary>
+	private void UpdateTooDeep()
+	{
+		//if (myInventory.HasArtifact(DeepWaterArtifactNumber))
+		//{
+		//	return;
+		//}
+
+		if (transform.position.y < DeepWaterDepth)
+		{
+			Health -= DeepWaterDamage * Time.deltaTime;
 		}
 	}
 
