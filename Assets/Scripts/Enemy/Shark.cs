@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-public class Shark : MonoBehaviour, IHeatSeakable
+public class Shark : MonoBehaviour, IHeatSeekable
 {
     public GameObject Target;
 

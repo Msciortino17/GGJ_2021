@@ -9,8 +9,8 @@ public class Torpedo : MonoBehaviour
 	public float MoveSpeed;
 	public float TrackingSpeed;
 	public float MaxTime;
-	public float HeatSeakingAccuracyRequired = 0.7f;
-	public float HeatSeakingRange = 30.0f;
+	public float HeatSeekingAccuracyRequired = 0.7f;
+	public float HeatSeekingRange = 30.0f;
 	private float timer;
 
 	private bool hasTarget;
@@ -55,18 +55,18 @@ public class Torpedo : MonoBehaviour
 			return;
 		}
 
-		var heatSeakables = FindObjectsOfType<MonoBehaviour>()
-								.OfType<IHeatSeakable>()
+		var heatSeekables = FindObjectsOfType<MonoBehaviour>()
+								.OfType<IHeatSeekable>()
 								.Select(x => ((MonoBehaviour)x).gameObject)
 								.Where(x => 
 								{
 									Vector3 toTarget = (x.transform.position - transform.position);
 
-									return toTarget.magnitude < HeatSeakingRange
-											&& Vector3.Dot(toTarget.normalized, transform.forward) > HeatSeakingAccuracyRequired;
+									return toTarget.magnitude < HeatSeekingRange
+											&& Vector3.Dot(toTarget.normalized, transform.forward) > HeatSeekingAccuracyRequired;
 								} );
 		
-		GameObject newTarget = heatSeakables.FirstOrDefault();
+		GameObject newTarget = heatSeekables.FirstOrDefault();
 		if(newTarget != null) SetTarget( newTarget.transform );
 	}
 
