@@ -12,6 +12,8 @@ public class Shark : MonoBehaviour
     public float Speed;
     public float RotationSpeed;
 
+    private float StunImmunity = 10.0f;
+    private float StunTime = 3.0f; 
     private float BiteImpulseForce = 5.0f;
     private float BiteRate_sec = 5.0f;
     private float BiteTriggerRange = 4.0f;
@@ -50,6 +52,7 @@ public class Shark : MonoBehaviour
         }
 
         BiteRestTimer.SetTime(BiteRate_sec);
+        StunImmunityTimer.SetTime(StunImmunity);
     }
 
     private void FixedUpdate()
@@ -66,7 +69,10 @@ public class Shark : MonoBehaviour
             float straightRatio = Mathf.Max(0.2f, Mathf.Abs(Vector3.Dot(toPlayerUnit, transform.forward)));
 
             // Move To
-            rigidBody.velocity = transform.forward * Speed * straightRatio;
+            if(!Stunned)
+            {
+                rigidBody.velocity = transform.forward * Speed * straightRatio;
+            }
 
             // Next idea to improve shark behavior would be to rotate the velocity based on a rotation speed, if necesarry
 
@@ -82,7 +88,7 @@ public class Shark : MonoBehaviour
     {
         if (Dead)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(transform.forward, -Vector3.up), 10.0f * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(transform.forward, -Vector3.up), 2.0f * Time.deltaTime);
             return;
         }
 
@@ -110,13 +116,36 @@ public class Shark : MonoBehaviour
             break;
         }
 
+        if(Stunned)
+        {
+            StunImmunityTimer.Reset();
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(transform.forward, Vector3.back), 5.0f * Time.deltaTime);
+
+            StunTimer.Interval();
+            if(StunTimer.Seconds > StunTime)
+            {
+                Stunned = false;
+                StunTimer.Reset();
+            }
+        }
+        else
+        {
+            StunImmunityTimer.Interval();
+        }
+
         // Track target
         Vector3 toTarget = targetPoint - transform.position;
         Vector3 toTargetUnit = toTarget.normalized;
         float distanceToTarget = toTarget.magnitude;
 
         // Look at target
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(toTargetUnit, Vector3.up), RotationSpeed * Time.deltaTime);
+        if(!Stunned)
+        {
+            transform.rotation = Quaternion.Slerp( transform.rotation,
+                                                   Quaternion.LookRotation(toTargetUnit, Vector3.up),
+                                                   RotationSpeed * Time.deltaTime);
+        }
 
         // Patrol logic
         if (state == SharkState.Patrol )
@@ -168,6 +197,16 @@ public class Shark : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("SonarPing"))
+        {
+            if(StunImmunityTimer.Seconds >= StunImmunity)
+            {
+                Stunned = true;
+            }
+        }
+    }
     private void NewPatrolPoint()
     {
         Vector3 point = sharkNest.SpawnPoint.transform.position;
@@ -183,6 +222,10 @@ public class Shark : MonoBehaviour
     private bool Biting = false;
     private Timer BiteRestTimer = new Timer();
     private Timer BiteActiveTimer = new Timer();
+    
+    private bool Stunned;
+    private Timer StunTimer = new Timer();
+    private Timer StunImmunityTimer = new Timer();
 
     private bool Dead;
     private Rigidbody rigidBody;
