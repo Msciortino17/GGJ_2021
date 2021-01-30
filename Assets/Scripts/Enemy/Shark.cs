@@ -9,12 +9,13 @@ public class Shark : MonoBehaviour
 
     public GameObject Bite;
 
-    public float Acceleration = 5.0f;
+    public float Acceleration = 1f;
     public float Speed = 15.0f;
-    public float RotationSpeed = 13.0f;
+    public float RotationSpeed = 3.0f;
 
+    public float BiteForce = 5.0f;
     public float BiteRate_sec = 5.0f;
-    public float BiteTriggerRange = 3.0f;
+    public float BiteTriggerRange = 4.0f;
 
     public float BiteAccuracyRequired = 0.8f;
 
@@ -35,8 +36,13 @@ public class Shark : MonoBehaviour
 
         if(!Dead)
         {
+            Vector3 toPlayer = Target.transform.position - transform.position;
+            Vector3 toPlayerUnit = toPlayer.normalized;
+
+            float straightRatio = Vector3.Dot(toPlayerUnit, transform.forward);
+
             // Move To
-            rigidBody.AddForce(transform.forward * Acceleration, ForceMode.Force);
+            rigidBody.velocity = transform.forward * Speed * straightRatio;
 
             if(rigidBody.velocity.magnitude > Speed)
             {
@@ -50,7 +56,7 @@ public class Shark : MonoBehaviour
         if( Target != null)
         {
             // Track
-            if(!Dead)
+            if(!Dead && rigidBody != null)
             {
                 Vector3 toPlayer = Target.transform.position - transform.position;
                 Vector3 toPlayerUnit = toPlayer.normalized;
@@ -65,13 +71,14 @@ public class Shark : MonoBehaviour
                     && toPlayer.magnitude < BiteTriggerRange
                     && biteAccuracy > BiteAccuracyRequired )
                 {
+                    rigidBody.AddForce(transform.forward * BiteForce, ForceMode.Impulse);
                     Biting = true;
                     BiteRestTimer.Reset();
                 }
             }
             else
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(transform.forward, -Vector3.up), RotationSpeed * Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(transform.forward, -Vector3.up), 10.0f * Time.deltaTime);
             }
         }
 

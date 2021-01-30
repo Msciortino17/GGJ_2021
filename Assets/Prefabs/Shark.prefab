@@ -51,11 +51,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   Bite: {fileID: 7145774684416670502}
-  Acceleration: 2
-  Speed: 12
-  RotationSpeed: 13
+  Acceleration: 0.2
+  Speed: 7
+  RotationSpeed: 0.8
+  BiteForce: 5
   BiteRate_sec: 5
-  BiteRange: 3
+  BiteTriggerRange: 4
   BiteAccuracyRequired: 0.8
 --- !u!54 &4081901944694683706
 Rigidbody:
@@ -65,7 +66,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4216050581097963806}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 250
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
@@ -451,4 +452,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b41849770fb33747bb3db041c8768b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 10
+  Damage: 25
