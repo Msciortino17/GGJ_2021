@@ -214,10 +214,10 @@ public class Submarine : MonoBehaviour
 	/// </summary>
 	private void UpdateShootTorpedoes()
 	{
-		if (!myInventory.HasArtifact(TorpedoArtifactNumber))
-		{
-			return;
-		}
+		//if (!myInventory.HasArtifact(TorpedoArtifactNumber))
+		//{
+		//	return;
+		//}
 
 		if (Input.GetKeyDown(KeyCode.Space) && torpedoCooldownTimer <= 0f)
 		{

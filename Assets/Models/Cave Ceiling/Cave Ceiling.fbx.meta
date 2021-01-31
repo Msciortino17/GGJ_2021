@@ -3,9 +3,14 @@ guid: 6de7ab17d668e584a8ee401833773362
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cave Ceiling
+    second: {fileID: 2100000, guid: 9481a37edec67c7429856498fe540b09, type: 2}
   materials:
-    materialImportMode: 0
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
