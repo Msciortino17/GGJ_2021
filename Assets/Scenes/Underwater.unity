@@ -1423,6 +1423,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1158541673, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
+      propertyPath: MaxHeight
+      value: 199
+      objectReference: {fileID: 0}
+    - target: {fileID: 1158541673, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
+      propertyPath: MinHeight
+      value: 405
+      objectReference: {fileID: 0}
+    - target: {fileID: 1158541673, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
