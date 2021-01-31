@@ -5486,6 +5486,9 @@ MonoBehaviour:
   HealthRegen: 5
   lowHealthThreshold: 0.4
   alertAudio: {fileID: 1466327381}
+  DmgPrefabs:
+  - {fileID: 4456169972124326062, guid: 18d51caa5c0be8e4e955857e692a98bd, type: 3}
+  - {fileID: 389910926558866386, guid: 75e7811b2c64e9c4abdc749b462313f7, type: 3}
   hudReference: {fileID: 0}
   SonarPingArtifactNumber: 0
   SonarPingSize: 8
@@ -5521,6 +5524,7 @@ MonoBehaviour:
   SonarMarker3: {fileID: 3406400350140987714}
   SonarMarker4: {fileID: 5073522323994798727}
   SonarMarker5: {fileID: 7472338273492911775}
+  currentSpeed: 0
   propSpinMat: {fileID: 2100000, guid: 9e6a5d578d16a48fdb275cd105910dab, type: 2}
 --- !u!114 &1158541673
 MonoBehaviour:
@@ -5686,7 +5690,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1483310661858158502, guid: 8a1b362f6b750a943bbbe38f1eea64c8, type: 2}
   m_audioClip: {fileID: 8300000, guid: ad11f3c665817004ba9bd45b40d39635, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
