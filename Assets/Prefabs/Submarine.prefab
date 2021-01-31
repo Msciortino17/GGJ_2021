@@ -642,7 +642,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &1158541676
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -675,7 +675,7 @@ MonoBehaviour:
   alertAudio: {fileID: 1466327381}
   hudReference: {fileID: 0}
   SonarPingArtifactNumber: 0
-  SonarPingSize: 15
+  SonarPingSize: 8
   SonarPingDuration: 1
   sonarAudio: {fileID: 1466327384}
   TorpedoArtifactNumber: 2
@@ -685,7 +685,7 @@ MonoBehaviour:
   DeepWaterArtifactNumber: 1
   DeepWaterDepth: 160
   DeepWaterDamage: 10
-  maxSpeed: 15
+  maxSpeed: 8
   maxPitchSpeed: 50
   maxTurnSpeed: 80
   acceleration: 2
