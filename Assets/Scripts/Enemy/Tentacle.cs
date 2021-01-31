@@ -16,7 +16,7 @@ public class Tentacle : MonoBehaviour
         var nodes = TentacleSpline.nodes;
         var node = nodes[nodes.Count - 1];
 
-        node.Position = Target.localPosition;
+        //node.Position = Target.localPosition;
         //node.Direction = Target.forward;
     }
 
