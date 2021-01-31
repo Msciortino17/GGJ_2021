@@ -7,6 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+	private bool knowsHowToPlay;
+	private const string knowsHowToPlayKey = "knowsHowToPlay";
+
+	public GameObject PlayButton;
+
 	public GameObject TitleMenu;
 	public GameObject HowToPlayMenu;
 	public GameObject OptionsMenu;
@@ -23,6 +28,8 @@ public class MainMenu : MonoBehaviour
 	void Start()
 	{
 		InitAudio();
+		knowsHowToPlay = PlayerPrefs.GetInt(knowsHowToPlayKey, 0) == 1;
+		PlayButton.SetActive(knowsHowToPlay);
 	}
 
 	/// <summary>
@@ -75,6 +82,10 @@ public class MainMenu : MonoBehaviour
 	{
 		TitleMenu.SetActive(false);
 		HowToPlayMenu.SetActive(true);
+
+		knowsHowToPlay = true;
+		PlayerPrefs.SetInt(knowsHowToPlayKey, knowsHowToPlay ? 1 : 0);
+		PlayButton.SetActive(knowsHowToPlay);
 	}
 
 	/// <summary>

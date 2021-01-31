@@ -38,8 +38,9 @@ public class HUD : MonoBehaviour
 
 		fullHealthWidth = healthBar.sizeDelta.x;
 
-		AddDialogue("", 2f);
-		AddDialogue("I don't remember much... Who I am, or how we ended up in this submerged cave system.", 8f);
+		AddDialogue("", 3f);
+		AddDialogue("Captain's Log", 5f);
+		AddDialogue("I don't remember much... Who I am, or how we ended here.", 7f);
 		AddDialogue("All I know is that I am the captain of this submarine, and we are trying to find the lost city of Atlantis.", 8f);
 		AddDialogue("Perhaps finding some Atlantian artifacts will shed light on our situation...", 8f);
 

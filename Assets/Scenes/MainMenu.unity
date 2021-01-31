@@ -2336,6 +2336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ea3c45f825a1e448686f608cb41a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayButton: {fileID: 714136020}
   TitleMenu: {fileID: 755587481}
   HowToPlayMenu: {fileID: 673818970}
   OptionsMenu: {fileID: 313595333}
