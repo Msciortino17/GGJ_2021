@@ -29,8 +29,6 @@ public class WaterColor : MonoBehaviour
     {
         float t = Mathf.InverseLerp(MinHeight, MaxHeight, transform.position.y);
 
-        print(t);
-
         camera.backgroundColor = Gradient.Evaluate(t);
         RenderSettings.fogColor = Color.Lerp(Color.black, Gradient.Evaluate(t), t);
     }
