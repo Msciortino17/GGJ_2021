@@ -701,10 +701,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1466327382, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
+      propertyPath: m_Pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1466327382, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1466327382, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2752238164780905605, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
       propertyPath: m_Name
       value: Submarine
       objectReference: {fileID: 0}
+    - target: {fileID: 2752238164780905606, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
+      propertyPath: DmgPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2752238164780905606, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
+      propertyPath: DmgPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 4456169972124326062, guid: 18d51caa5c0be8e4e955857e692a98bd, type: 3}
+    - target: {fileID: 2752238164780905606, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
+      propertyPath: DmgPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 389910926558866386, guid: 75e7811b2c64e9c4abdc749b462313f7, type: 3}
     - target: {fileID: 2752238164780905607, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
       propertyPath: m_RootOrder
       value: 3

@@ -13,6 +13,8 @@ public class Submarine : MonoBehaviour
 	private float maxHealth;
 	public float lowHealthThreshold;
 	public AudioSource alertAudio;
+	public GameObject[] DmgPrefabs;
+	private int currentClip = 0;
 	public HUD hudReference;
 
 	private bool gameFinished;
@@ -67,7 +69,7 @@ public class Submarine : MonoBehaviour
 	Vector3 velocity;
 	float yawVelocity;
 	float pitchVelocity;
-	float currentSpeed;
+	public float currentSpeed;
 	public Material propSpinMat;
 
 	void Start()
@@ -90,6 +92,7 @@ public class Submarine : MonoBehaviour
 			UpdateShootTorpedoes();
 			UpdateTooDeep();
 			UpdateHealth();
+			UpdateEngineSound();
 		}
 		UpdateGameOver();
 	}
@@ -247,7 +250,7 @@ public class Submarine : MonoBehaviour
 
 		if (transform.position.y < DeepWaterDepth)
 		{
-			TakeDamage( DeepWaterDamage * Time.deltaTime );
+			TakeDamage( DeepWaterDamage * Time.deltaTime , false);
 
 			if (hudReference.DialogueEmpty())
 			{
@@ -293,6 +296,16 @@ public class Submarine : MonoBehaviour
 		}
 	}
 
+	private void UpdateEngineSound()
+    {
+		float speedRatio = Mathf.Abs(currentSpeed) / maxSpeed;
+		float yawRatio = Mathf.Abs(yawVelocity) / maxPitchSpeed;
+		float pitchRatio = Mathf.Abs(pitchVelocity) / maxTurnSpeed;
+		engineAudio.pitch = (speedRatio / 2 + 0.5f) * Mathf.Pow(1.1f, yawRatio) * Mathf.Pow(1.25f, pitchRatio);
+		engineAudio.volume = Mathf.Pow(speedRatio, 0.5f) * 0.5f + 0.5f;
+
+	}
+
 	/// <summary>
 	/// Simple ratio of current health to max health.
 	/// </summary>
@@ -306,10 +319,21 @@ public class Submarine : MonoBehaviour
 	/// </summary>
 	public void TakeDamage(float damage)
 	{
+		TakeDamage(damage, true);
+	}
+
+	public void TakeDamage(float damage, bool external)
+	{
 		Health -= damage;
-		if(GetHealthRatio() < lowHealthThreshold)
-        {
-			alertAudio.Play();
-        }
+		if (external)
+		{
+			Transform dmg = Instantiate(DmgPrefabs[currentClip]).transform;
+			dmg.position = transform.position;
+			currentClip = 1 - currentClip;
+			if (GetHealthRatio() < lowHealthThreshold)
+			{
+				alertAudio.Play();
+			}
+		}
 	}
 }
