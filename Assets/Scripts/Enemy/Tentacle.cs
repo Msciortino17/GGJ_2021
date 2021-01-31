@@ -9,13 +9,18 @@ public class Tentacle : MonoBehaviour
 {
     public Spline TentacleSpline;
 
+    private float RotationSpeed = 5.0f;
+    private float AttackRate = 3.0f;
+    private float AttackTime = 0.5f;
+    private float AttackRange = 5.0f;
+
     private float WaveScale = 3.0f;
     private float WaveFreq = 2.0f;
 
     private int BaseNodes = 2;
 
     private void Start() {
-        WaveTimer += Random.value * 5;
+        WaveTimer.SetTime(Random.value * 5);
         IncrementTentacle();
     }
 
@@ -25,18 +30,45 @@ public class Tentacle : MonoBehaviour
         UpdateTentacle();
     }
 
-    private float WaveTimer = 0;
-
     private void UpdateTentacle()
     {
         if( !isActive ) return;
 
-        WaveTimer += Time.deltaTime;
+        WaveTimer.Interval();
         IncrementTentacle();
     }
 
     private void IncrementTentacle()
     {
+        Vector3 toPlayer = submarine.transform.position - transform.position;
+        toPlayer.y = 0;
+        Vector3 toPlayerUnit = toPlayer.normalized;
+        float distance = toPlayer.magnitude;
+
+        transform.rotation = Quaternion.Slerp( transform.rotation,
+                                               Quaternion.LookRotation( toPlayer, Vector3.up ),
+                                               RotationSpeed * Time.deltaTime );
+
+        if( distance < AttackRange )
+        {
+            AttackTimer.Interval();
+            if( AttackTimer.Seconds > AttackRate && !Attacking )
+            {
+                Attacking = true;
+                // Play sound?
+            }
+        }
+
+        if(Attacking)
+        {
+
+            if(AttackingTimer.Seconds > AttackTime)
+            {
+                AttackingTimer.Reset();
+                AttackTimer.Reset();
+            }
+        }
+
         var nodes = TentacleSpline.nodes;
         for( int i = BaseNodes; i < nodes.Count; ++i )
         {
@@ -44,7 +76,7 @@ public class Tentacle : MonoBehaviour
 
             float ratio = (float)(i-BaseNodes) / (nodes.Count - BaseNodes - 1) * (2*Mathf.PI) * WaveFreq;
 
-            float result = Mathf.Sin( ratio + WaveTimer ) * WaveScale;
+            float result = Mathf.Sin( ratio + WaveTimer.Seconds ) * WaveScale;
 
             Vector3 pos = node.Position;
             pos.x = result;
@@ -74,6 +106,11 @@ public class Tentacle : MonoBehaviour
         }
     }
 
+
+    private bool Attacking = false;
+    private Timer WaveTimer = new Timer();
+    private Timer AttackTimer = new Timer();
+    private Timer AttackingTimer = new Timer();
     private Vector3[] bones;
     private bool isActive;
     private GameObject submarine;
