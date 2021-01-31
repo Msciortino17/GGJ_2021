@@ -11,16 +11,16 @@ public class Shark : MonoBehaviour
     public float Acceleration;
     public float Speed;
     public float RotationSpeed;
+    public float BiteImpulseForce;
 
     private float StunImmunity = 10.0f;
-    private float StunTime = 3.0f; 
-    private float BiteImpulseForce = 5.0f;
+    private float StunTime = 3.0f;
     private float BiteRate_sec = 5.0f;
-    private float BiteTriggerRange = 4.0f;
-    private float BiteAccuracyRequired = 0.8f;
+    private float BiteTriggerRange = 3.0f;
+    private float BiteAccuracyRequired = 0.9f;
     private float AggroRange = 60.0f;
     private float PatrolRange = 30.0f;
-    private float PatrolPointRange = 4.0f;
+    private float PatrolPointReach = 5.0f;
 
     public enum SharkState
     {
@@ -28,14 +28,21 @@ public class Shark : MonoBehaviour
         Patrol
     }
 
-    public void SetSharkNest(SharkNest sharkNest)
+    public void SetSharkNest(SharkNest _sharkNest)
     {
-        this.sharkNest = sharkNest;
+        sharkNest = _sharkNest;
+    }
+
+    public void SetRadius( float radius )
+    {
+        AggroRange = radius;
+        PatrolRange = radius / 2;
     }
 
     public void SetPlayer(GameObject _player)
     {
         player = _player;
+        playerRigidBody = _player.GetComponent<Rigidbody>();
     }
 
     public void SetState(SharkState _state)
@@ -76,6 +83,8 @@ public class Shark : MonoBehaviour
 
             // Next idea to improve shark behavior would be to rotate the velocity based on a rotation speed, if necesarry
 
+
+
             // Maintain maximum speed
             if (!Biting && rigidBody.velocity.magnitude > Speed)
             {
@@ -95,21 +104,24 @@ public class Shark : MonoBehaviour
         // Check if player out of range of nest
         Vector3 targetVectorFromNest = player.transform.position - sharkNest.transform.position;
         float distanceFromNest = targetVectorFromNest.magnitude;
-        if (distanceFromNest > AggroRange)
+        if( distanceFromNest > AggroRange || BiteRestTimer.Seconds < BiteRate_sec )
         {
-            SetState(SharkState.Patrol);
-            NewPatrolPoint();
+            if( state == SharkState.Aggro )
+            {
+                SetState( SharkState.Patrol );
+                NewPatrolPoint();
+            }
         }
         else
         {
-            SetState(SharkState.Aggro);
+            SetState( SharkState.Aggro );
         }
 
         // Determine current target point based on state
         switch(state)
         {
             case SharkState.Aggro:
-                targetPoint = player.transform.position;
+                targetPoint = player.transform.position + playerRigidBody.velocity - player.transform.forward * 0.75f;
             break;
             case SharkState.Patrol:
                 targetPoint = patrolPoint;
@@ -147,10 +159,12 @@ public class Shark : MonoBehaviour
                                                    RotationSpeed * Time.deltaTime);
         }
 
+        BiteRestTimer.Interval();
+
         // Patrol logic
         if (state == SharkState.Patrol )
         {
-            if(distanceToTarget < PatrolPointRange )
+            if(distanceToTarget < PatrolPointReach )
             {
                 NewPatrolPoint();
             }
@@ -160,10 +174,9 @@ public class Shark : MonoBehaviour
         {
             // Bite
             float biteAccuracy = Vector3.Dot(toTargetUnit, transform.forward);
-            BiteRestTimer.Interval();
-            if (BiteRestTimer.Seconds >= BiteRate_sec
-                && toTarget.magnitude < BiteTriggerRange
-                && biteAccuracy > BiteAccuracyRequired)
+            if ( BiteRestTimer.Seconds >= BiteRate_sec
+                 && toTarget.magnitude < BiteTriggerRange
+                 && biteAccuracy > BiteAccuracyRequired)
             {
                 rigidBody?.AddForce(transform.forward * BiteImpulseForce, ForceMode.Impulse);
                 Biting = true;
@@ -207,6 +220,7 @@ public class Shark : MonoBehaviour
             }
         }
     }
+
     private void NewPatrolPoint()
     {
         Vector3 point = sharkNest.SpawnPoint.transform.position;
@@ -231,6 +245,7 @@ public class Shark : MonoBehaviour
     private Rigidbody rigidBody;
     private SharkNest sharkNest;
     private GameObject player;
+    private Rigidbody playerRigidBody;
     private Vector3 patrolPoint;
     private Vector3 targetPoint;
 }

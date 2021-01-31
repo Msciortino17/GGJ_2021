@@ -8,6 +8,8 @@ public class SharkNest : MonoBehaviour
 
     public Transform SpawnPoint;
 
+    public float Radius = 50.0f;
+
     public int SharksInNest = 3;
 
     public float SpawnRate_sec = 5;
@@ -45,6 +47,7 @@ public class SharkNest : MonoBehaviour
         shark.SetSharkNest(this);
         shark.SetPlayer(Submarine);
         shark.SetState(Shark.SharkState.Aggro);
+        shark.SetRadius( Radius );
 
         SharksSpawned++;
     }

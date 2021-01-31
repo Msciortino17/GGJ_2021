@@ -92,12 +92,6 @@ public class Submarine : MonoBehaviour
 			UpdateHealth();
 		}
 		UpdateGameOver();
-
-		// temp testing
-		if (Input.GetKeyDown(KeyCode.J))
-		{
-			TakeDamage(10f);
-		}
 	}
 
 	private void OnTriggerEnter(Collider other)

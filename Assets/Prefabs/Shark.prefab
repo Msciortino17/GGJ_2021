@@ -50,16 +50,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bite: {fileID: 7145774684416670502}
-  Acceleration: 0.2
+  Acceleration: 0.4
   Speed: 8
-  RotationSpeed: 1
-  BiteImpulseForce: 5
-  BiteRate_sec: 5
-  BiteTriggerRange: 4
-  BiteAccuracyRequired: 0.8
-  AggroRange: 60
-  PatrolRange: 10
-  PatrolPointRange: 4
+  RotationSpeed: 4
+  BiteImpulseForce: 5000
 --- !u!54 &4081901944694683706
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -454,4 +448,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b41849770fb33747bb3db041c8768b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 25
+  Damage: 40
