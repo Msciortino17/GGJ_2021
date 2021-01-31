@@ -47,7 +47,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 980727161375112427}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -138,7 +138,7 @@ Transform:
   m_GameObject: {fileID: 3272701320967688843}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 373.42, y: 184.33, z: 218.15}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8182106499996745274}
   - {fileID: 6220387119256207911}
@@ -156,7 +156,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 70
+  m_Radius: 100
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &953501429236706503
 MonoBehaviour:
@@ -172,6 +172,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SharkPrefab: {fileID: 4216050581097963806, guid: 8957252c1030e8f4e9aa81687b7a734e, type: 3}
   SpawnPoint: {fileID: 6220387119256207911}
-  Radius: 50
+  Radius: 80
   SharksInNest: 3
   SpawnRate_sec: 5
