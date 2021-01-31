@@ -66,7 +66,7 @@ MonoBehaviour:
   - This odd device must have come from Atlantis. I will have our ship's computer
     begin analysis.
   - The Atlantians used this to generate powerful sonar blasts.
-  - Press C to release a sonar ping, stunning nearby small enemies.
+  - Press C to release a sonar ping, showing the direction of the next artifact.
 --- !u!1 &6993025256095856469
 GameObject:
   m_ObjectHideFlags: 0

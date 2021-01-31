@@ -20,7 +20,6 @@ public class Submarine : MonoBehaviour
 
 	[Header("Abilities")]
 	public int SonarPingArtifactNumber;
-	public Transform SonarPingTransform;
 	private Vector3 sonarPingStartSize;
 	public float SonarPingSize;
 	private Vector3 sonarPingFinalSize;
@@ -52,6 +51,19 @@ public class Submarine : MonoBehaviour
 	public float rudderAngle = 30;
 	public AudioSource engineAudio;
 
+	[Header("Sonar")]
+	public Transform ArtifactPyramid;
+	public Transform ArtifactCube;
+	public Transform ArtifactCrystal;
+	public Transform ArtifactSkull;
+	public Transform Castle;
+	public Transform SonarPingTransform;
+	public GameObject SonarMarker1;
+	public GameObject SonarMarker2;
+	public GameObject SonarMarker3;
+	public GameObject SonarMarker4;
+	public GameObject SonarMarker5;
+
 	Vector3 velocity;
 	float yawVelocity;
 	float pitchVelocity;
@@ -61,7 +73,7 @@ public class Submarine : MonoBehaviour
 	void Start()
 	{
 		maxHealth = Health;
-		currentSpeed = maxSpeed;
+		currentSpeed = 5;
 		myRigidBody = GetComponent<Rigidbody>();
 		myInventory = GetComponent<Inventory>();
 
@@ -154,10 +166,10 @@ public class Submarine : MonoBehaviour
 	/// </summary>
 	private void UpdateSonarPing()
 	{
-		//if (!myInventory.HasArtifact(SonarPingArtifactNumber))
-		//{
-		//	return;
-		//}
+		if (!myInventory.HasArtifact(SonarPingArtifactNumber))
+		{
+			return;
+		}
 
 		if (sonarPingTimer > 0f)
 		{
@@ -165,7 +177,12 @@ public class Submarine : MonoBehaviour
 
 			float ratio = sonarPingTimer / SonarPingDuration;
 			ratio = 1f - ratio;
-			SonarPingTransform.localScale = Vector3.Slerp(sonarPingStartSize, sonarPingFinalSize, ratio);
+
+			SonarMarker1.SetActive(ratio >= 0f && ratio < 0.2f);
+			SonarMarker2.SetActive(ratio >= 0.2f && ratio < 0.4f);
+			SonarMarker3.SetActive(ratio >= 0.4f && ratio < 0.6f);
+			SonarMarker4.SetActive(ratio >= 0.6f && ratio < 0.8f);
+			SonarMarker5.SetActive(ratio >= 0.8f && ratio < 1f);
 
 			sonarPingTimer -= Time.deltaTime;
 		}
@@ -177,6 +194,23 @@ public class Submarine : MonoBehaviour
 			{
 				sonarPingTimer = SonarPingDuration;
 				sonarAudio.Play();
+
+				Transform target = ArtifactCube;
+				if (ArtifactCube == null)
+				{
+					target = ArtifactCrystal;
+					if (ArtifactCrystal == null)
+					{
+						target = ArtifactSkull;
+						if (ArtifactSkull == null)
+						{
+							target = Castle;
+						}
+					}
+				}
+
+				Vector3 toTarget = (target.transform.position - transform.position).normalized;
+				SonarPingTransform.rotation = Quaternion.LookRotation(toTarget, Vector3.up);
 			}
 		}
 	}
@@ -186,10 +220,10 @@ public class Submarine : MonoBehaviour
 	/// </summary>
 	private void UpdateShootTorpedoes()
 	{
-		//if (!myInventory.HasArtifact(TorpedoArtifactNumber))
-		//{
-		//	return;
-		//}
+		if (!myInventory.HasArtifact(TorpedoArtifactNumber))
+		{
+			return;
+		}
 
 		if (Input.GetKeyDown(KeyCode.Space) && torpedoCooldownTimer <= 0f)
 		{
@@ -212,10 +246,10 @@ public class Submarine : MonoBehaviour
 	/// </summary>
 	private void UpdateTooDeep()
 	{
-		//if (myInventory.HasArtifact(DeepWaterArtifactNumber))
-		//{
-		//	return;
-		//}
+		if (myInventory.HasArtifact(DeepWaterArtifactNumber))
+		{
+			return;
+		}
 
 		if (transform.position.y < DeepWaterDepth)
 		{

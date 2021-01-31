@@ -65,7 +65,7 @@ public class MainMenu : MonoBehaviour
 	/// </summary>
 	public void PlayGame()
 	{
-		//SceneManager.LoadScene("todo");
+		SceneManager.LoadScene("Underwater");
 	}
 
 	/// <summary>
