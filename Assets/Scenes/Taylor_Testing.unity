@@ -6845,6 +6845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ea3c45f825a1e448686f608cb41a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayButton: {fileID: 0}
   TitleMenu: {fileID: 0}
   HowToPlayMenu: {fileID: 0}
   OptionsMenu: {fileID: 0}
