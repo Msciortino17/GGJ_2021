@@ -11,6 +11,8 @@ public class Torpedo : MonoBehaviour
 	public float MaxTime;
 	private float timer;
 
+	public ParticleSystem MyParticles;
+	public GameObject ExplosionPrefab;
 	public GameObject BoomPrefab;
 	private Transform target;
 
@@ -37,8 +39,17 @@ public class Torpedo : MonoBehaviour
 	/// </summary>
 	private void OnCollisionEnter(Collision collision)
 	{
+		MyParticles.Stop();
+		MyParticles.transform.parent = null;
+		MyParticles.GetComponent<DestroyAfterTime>().Countdown = true;
+		MyParticles.transform.localScale = Vector3.one;
+
 		Transform boom = Instantiate(BoomPrefab).transform;
 		boom.position = transform.position;
+
+		Transform explosion = Instantiate(ExplosionPrefab).transform;
+		explosion.position = transform.position;
+
 		DestroyTorpedo();
 	}
 
