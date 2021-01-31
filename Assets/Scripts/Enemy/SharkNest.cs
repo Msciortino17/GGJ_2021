@@ -14,17 +14,19 @@ public class SharkNest : MonoBehaviour
 
     private void Update()
     {
-        if(SubmarineDetected && SharksSpawned < SharksInNest)
+        if(SubmarineDetected)
         {
-            Timer.Interval();
-            if( Timer.Seconds > SpawnRate_sec || SharksSpawned == 0 )
+            if(SharksSpawned < SharksInNest)
             {
-                SpawnShark();
-                Timer.Reset();
+                Timer.Interval();
+                if( Timer.Seconds > SpawnRate_sec || SharksSpawned == 0 )
+                {
+                    SpawnShark();
+                    Timer.Reset();
+                }
             }
         }
-
-        if( !SubmarineDetected )
+        else
         {
             Timer.Reset();
         }
