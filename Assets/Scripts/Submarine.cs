@@ -53,7 +53,7 @@ public class Submarine : MonoBehaviour
 	Vector3 velocity;
 	float yawVelocity;
 	float pitchVelocity;
-	float currentSpeed;
+	public float currentSpeed;
 	public Material propSpinMat;
 
 	void Start()
@@ -74,6 +74,7 @@ public class Submarine : MonoBehaviour
 		UpdateShootTorpedoes();
 		UpdateTooDeep();
 		UpdateHealth();
+		UpdateEngineSound();
 
 		// temp testing
 		if (Input.GetKeyDown(KeyCode.J))
@@ -213,6 +214,16 @@ public class Submarine : MonoBehaviour
 		{
 			// todo - game over
 		}
+	}
+
+	private void UpdateEngineSound()
+    {
+		float speedRatio = Mathf.Abs(currentSpeed) / maxSpeed;
+		float yawRatio = Mathf.Abs(yawVelocity) / maxPitchSpeed;
+		float pitchRatio = Mathf.Abs(pitchVelocity) / maxTurnSpeed;
+		engineAudio.pitch = (speedRatio / 2 + 0.5f) * Mathf.Pow(1.1f, yawRatio) * Mathf.Pow(1.25f, pitchRatio);
+		engineAudio.volume = Mathf.Pow(speedRatio, 0.5f) * 0.5f + 0.5f;
+
 	}
 
 	/// <summary>
