@@ -12,6 +12,8 @@ public class Submarine : MonoBehaviour
 	private float maxHealth;
 	public float lowHealthThreshold;
 	public AudioSource alertAudio;
+	public GameObject[] DmgPrefabs;
+	private int currentClip = 0;
 	public HUD hudReference;
 
 	[Header("Abilities")]
@@ -187,7 +189,7 @@ public class Submarine : MonoBehaviour
 
 		if (transform.position.y < DeepWaterDepth)
 		{
-			TakeDamage( DeepWaterDamage * Time.deltaTime );
+			TakeDamage( DeepWaterDamage * Time.deltaTime , false);
 
 			if (hudReference.DialogueEmpty())
 			{
@@ -226,10 +228,21 @@ public class Submarine : MonoBehaviour
 	/// </summary>
 	public void TakeDamage(float damage)
 	{
+		TakeDamage(damage, true);
+	}
+
+	public void TakeDamage(float damage, bool external)
+	{
 		Health -= damage;
-		if(GetHealthRatio() < lowHealthThreshold)
-        {
-			alertAudio.Play();
-        }
+		if (external)
+		{
+			Transform dmg = Instantiate(DmgPrefabs[currentClip]).transform;
+			dmg.position = transform.position;
+			currentClip = 1 - currentClip;
+			if (GetHealthRatio() < lowHealthThreshold)
+			{
+				alertAudio.Play();
+			}
+		}
 	}
 }
