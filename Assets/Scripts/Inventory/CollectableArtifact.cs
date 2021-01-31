@@ -8,6 +8,7 @@ public class CollectableArtifact : MonoBehaviour
 	public HUD hudReference;
 	public string DialogueMessage;
 	public GameObject SoundPrefab;
+	public string[] DialogueMessages;
 
 	// Start is called before the first frame update
 	void Start()
@@ -30,9 +31,12 @@ public class CollectableArtifact : MonoBehaviour
 		{
 			Inventory inventory = other.GetComponent<Inventory>();
 			inventory.CollectArtifact(ArtifactIndex);
-			hudReference.AddDialogue(DialogueMessage);
 			Transform jingle = Instantiate(SoundPrefab).transform;
 			jingle.position = transform.position;
+			for (int i = 0; i < DialogueMessages.Length; i++)
+			{
+				hudReference.AddDialogue(DialogueMessages[i]);
+			}
 			Destroy(gameObject);
 		}
 	}
