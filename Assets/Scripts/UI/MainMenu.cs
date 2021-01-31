@@ -29,7 +29,10 @@ public class MainMenu : MonoBehaviour
 	{
 		InitAudio();
 		knowsHowToPlay = PlayerPrefs.GetInt(knowsHowToPlayKey, 0) == 1;
-		PlayButton.SetActive(knowsHowToPlay);
+		if (PlayButton != null)
+		{
+			PlayButton.SetActive(knowsHowToPlay);
+		}
 	}
 
 	/// <summary>

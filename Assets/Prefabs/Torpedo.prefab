@@ -5046,7 +5046,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 10
   TrackingSpeed: 5
-  MaxTime: 5
+  MaxTime: 10
   MyParticles: {fileID: 3637612318140769800}
   ExplosionPrefab: {fileID: 6750654785959700333, guid: 04d0ba01b65ba6d49be91ef2e04b6b54, type: 3}
   BoomPrefab: {fileID: 7757758110591775711, guid: 2f61ce76266e79e489dd46a0d650c361, type: 3}

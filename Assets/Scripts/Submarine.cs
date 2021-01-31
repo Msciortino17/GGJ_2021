@@ -189,11 +189,11 @@ public class Submarine : MonoBehaviour
 				sonarPingTimer = SonarPingDuration;
 				sonarAudio.Play();
 
-				Transform target = ArtifactCube;
-				if (ArtifactCube == null)
+				Transform target = ArtifactCrystal;
+				if (ArtifactCrystal == null)
 				{
-					target = ArtifactCrystal;
-					if (ArtifactCrystal == null)
+					target = ArtifactCube;
+					if (ArtifactCube == null)
 					{
 						target = ArtifactSkull;
 						if (ArtifactSkull == null)

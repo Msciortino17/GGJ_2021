@@ -44,12 +44,6 @@ public class Torpedo : MonoBehaviour
 		MyParticles.GetComponent<DestroyAfterTime>().Countdown = true;
 		MyParticles.transform.localScale = Vector3.one;
 
-		Transform boom = Instantiate(BoomPrefab).transform;
-		boom.position = transform.position;
-
-		Transform explosion = Instantiate(ExplosionPrefab).transform;
-		explosion.position = transform.position;
-
 		DestroyTorpedo();
 	}
 
@@ -74,6 +68,13 @@ public class Torpedo : MonoBehaviour
 	/// </summary>
 	private void DestroyTorpedo()
 	{
+
+		Transform boom = Instantiate(BoomPrefab).transform;
+		boom.position = transform.position;
+
+		Transform explosion = Instantiate(ExplosionPrefab).transform;
+		explosion.position = transform.position;
+
 		Destroy(gameObject);
 	}
 
