@@ -1414,18 +1414,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1158541673, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
-      propertyPath: MaxHeight
-      value: 199
-      objectReference: {fileID: 0}
-    - target: {fileID: 1158541673, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
-      propertyPath: MinHeight
-      value: 405
-      objectReference: {fileID: 0}
-    - target: {fileID: 1158541673, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2752238164780905605, guid: 20dc78fa9854e574c8d144c806776a9e, type: 3}
       propertyPath: m_Name
       value: Submarine
@@ -1713,6 +1701,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1958424391586214206, guid: df0d4e07e115d524ab6e6ff7602753d6, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1958424391586214206, guid: df0d4e07e115d524ab6e6ff7602753d6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1958424391586214206, guid: df0d4e07e115d524ab6e6ff7602753d6, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1958424391586214206, guid: df0d4e07e115d524ab6e6ff7602753d6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2735473292821053729, guid: df0d4e07e115d524ab6e6ff7602753d6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7275553108375399679, guid: df0d4e07e115d524ab6e6ff7602753d6, type: 3}
       propertyPath: submarine
       value: 
