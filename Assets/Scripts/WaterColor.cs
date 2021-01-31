@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class WaterColor : MonoBehaviour
 {
-    [Range(1,200)]
-    public float MaxHeight = 100f;
+    [Range(0f, 600f)]
+    public float MinHeight = 200f;
+
+    [Range(0f,600f)]
+    public float MaxHeight = 400f;
 
     public Gradient Gradient;
 
@@ -24,9 +27,11 @@ public class WaterColor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float t = Mathf.InverseLerp(0, MaxHeight, transform.position.y - terrain.SampleHeight(transform.position));
+        float t = Mathf.InverseLerp(MinHeight, MaxHeight, transform.position.y);
 
-        camera.backgroundColor = Gradient.Evaluate(1 - t);
-        RenderSettings.fogColor = Color.Lerp(Gradient.Evaluate(t), Color.black, t);
+        print(t);
+
+        camera.backgroundColor = Gradient.Evaluate(t);
+        RenderSettings.fogColor = Color.Lerp(Color.black, Gradient.Evaluate(t), t);
     }
 }
