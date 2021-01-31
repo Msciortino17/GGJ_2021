@@ -453,3 +453,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 25
+  DmgPrefabs:
+  - {fileID: 4456169972124326062, guid: 18d51caa5c0be8e4e955857e692a98bd, type: 3}
+  - {fileID: 389910926558866386, guid: 75e7811b2c64e9c4abdc749b462313f7, type: 3}
