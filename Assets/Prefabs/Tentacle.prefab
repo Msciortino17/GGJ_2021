@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1792990053710615528}
   - component: {fileID: 1792990053710615529}
   - component: {fileID: 1792990053710615530}
+  - component: {fileID: 2798926328534911306}
   m_Layer: 13
   m_Name: Tentacle
   m_TagString: Untagged
@@ -59,6 +60,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 50
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &2798926328534911306
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792990053710615531}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 25, z: 1}
+  m_Center: {x: 0, y: 10, z: 0}
 --- !u!1 &1792990053764943105
 GameObject:
   m_ObjectHideFlags: 0
