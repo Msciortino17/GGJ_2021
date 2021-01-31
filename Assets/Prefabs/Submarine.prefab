@@ -5490,6 +5490,7 @@ MonoBehaviour:
   - {fileID: 4456169972124326062, guid: 18d51caa5c0be8e4e955857e692a98bd, type: 3}
   - {fileID: 389910926558866386, guid: 75e7811b2c64e9c4abdc749b462313f7, type: 3}
   hudReference: {fileID: 0}
+  FinalAtlantisSound: {fileID: 6440275269065083780, guid: e3ae72798c9e4ce429925c34e38f3ba8, type: 3}
   SonarPingArtifactNumber: 0
   SonarPingSize: 8
   SonarPingDuration: 1

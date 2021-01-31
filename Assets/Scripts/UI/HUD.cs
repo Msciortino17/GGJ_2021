@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HUD : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class HUD : MonoBehaviour
 	[SerializeField] private RectTransform healthBar;
 	[SerializeField] private Text dialogueText;
 	[SerializeField] private Image blackBackdrop;
+	[SerializeField] private GameObject pauseMenu;
 	private float targetBlackAlpha;
 	private float blackFadeSpeed;
 	private float fullHealthWidth;
@@ -18,6 +20,8 @@ public class HUD : MonoBehaviour
 	private float dialogueTimer;
 
 	public GameObject[] ArtifactIcons;
+
+	public bool Paused;
 
 	// Start is called before the first frame update
 	void Start()
@@ -40,7 +44,7 @@ public class HUD : MonoBehaviour
 
 		AddDialogue("", 3f);
 		AddDialogue("Captain's Log", 5f);
-		AddDialogue("I don't remember much... Who I am, or how we ended here.", 7f);
+		AddDialogue("I don't remember much... Who I am, or how we ended up here.", 7f);
 		AddDialogue("All I know is that I am the captain of this submarine, and we are trying to find the lost city of Atlantis.", 8f);
 		AddDialogue("Perhaps finding some Atlantian artifacts will shed light on our situation...", 8f);
 
@@ -53,6 +57,11 @@ public class HUD : MonoBehaviour
 		UpdateHealthBar();
 		UpdateDialogue();
 		UpdateFadeBlack();
+
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			TogglePause();
+		}
 	}
 
 	/// <summary>
@@ -143,13 +152,44 @@ public class HUD : MonoBehaviour
 		
 		if (color.a > targetBlackAlpha)
 		{
-			color.a -= blackFadeSpeed * Time.deltaTime;
+			color.a -= blackFadeSpeed * Time.unscaledDeltaTime;
+			if (color.a < targetBlackAlpha)
+			{
+				color.a = targetBlackAlpha;
+			}
 		}
 		else if (color.a < targetBlackAlpha)
 		{
-			color.a += blackFadeSpeed * Time.deltaTime;
+			color.a += blackFadeSpeed * Time.unscaledDeltaTime;
+			if (color.a > targetBlackAlpha)
+			{
+				color.a = targetBlackAlpha;
+			}
 		}
 
 		blackBackdrop.color = color;
+	}
+
+	public void TogglePause()
+	{
+		Paused = !Paused;
+		if (Paused)
+		{
+			Time.timeScale = 0f;
+			pauseMenu.SetActive(true);
+			FadeBlack(0.5f, 2f);
+		}
+		else
+		{
+			Time.timeScale = 1f;
+			pauseMenu.SetActive(false);
+			FadeBlack(0f, 2f);
+		}
+	}
+
+	public void QuitToMenu()
+	{
+		TogglePause();
+		SceneManager.LoadScene("MainMenu");
 	}
 }

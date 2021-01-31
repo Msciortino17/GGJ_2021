@@ -16,6 +16,7 @@ public class Submarine : MonoBehaviour
 	public GameObject[] DmgPrefabs;
 	private int currentClip = 0;
 	public HUD hudReference;
+	public GameObject FinalAtlantisSound;
 
 	private bool gameFinished;
 	private float gameOverTimer;
@@ -85,16 +86,19 @@ public class Submarine : MonoBehaviour
 
 	void Update()
 	{
-		if (!gameFinished)
+		if (!hudReference.Paused)
 		{
-			UpdateMovement();
-			UpdateSonarPing();
-			UpdateShootTorpedoes();
-			UpdateTooDeep();
-			UpdateHealth();
-			UpdateEngineSound();
+			if (!gameFinished)
+			{
+				UpdateMovement();
+				UpdateSonarPing();
+				UpdateShootTorpedoes();
+				UpdateTooDeep();
+				UpdateHealth();
+				UpdateEngineSound();
+			}
+			UpdateGameOver();
 		}
-		UpdateGameOver();
 	}
 
 	private void OnTriggerEnter(Collider other)
@@ -118,6 +122,9 @@ public class Submarine : MonoBehaviour
 			hudReference.AddDialogue("And now they are but relics to us surface dwellers.", 8f);
 			hudReference.AddDialogue("I can only pray that humanity is spared a similar fate...", 8f);
 			hudReference.AddDialogue("The End. Thanks for playing!", 8f);
+
+			Transform jingle = Instantiate(FinalAtlantisSound).transform;
+			jingle.position = transform.position;
 		}
 	}
 
