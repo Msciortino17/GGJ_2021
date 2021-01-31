@@ -6,7 +6,6 @@ public class CollectableArtifact : MonoBehaviour
 {
 	public int ArtifactIndex;
 	public HUD hudReference;
-	public string DialogueMessage;
 	public GameObject SoundPrefab;
 	public string[] DialogueMessages;
 
@@ -35,7 +34,7 @@ public class CollectableArtifact : MonoBehaviour
 			jingle.position = transform.position;
 			for (int i = 0; i < DialogueMessages.Length; i++)
 			{
-				hudReference.AddDialogue(DialogueMessages[i]);
+				hudReference.AddDialogue(DialogueMessages[i], 8f);
 			}
 			Destroy(gameObject);
 		}

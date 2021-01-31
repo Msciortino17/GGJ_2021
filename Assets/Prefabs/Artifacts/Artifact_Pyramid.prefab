@@ -61,11 +61,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArtifactIndex: 0
   hudReference: {fileID: 0}
+  SoundPrefab: {fileID: 6440275269065083780, guid: e3ae72798c9e4ce429925c34e38f3ba8, type: 3}
   DialogueMessages:
   - This odd device must have come from Atlantis. I will have our ship's computer
     begin analysis.
   - The Atlantians used this to generate powerful sonar blasts.
-  - Press C to release a sonar ping, stunning nearby small enemies.
+  - Press C to release a sonar ping, showing the direction of the next artifact.
 --- !u!1 &6993025256095856469
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,8 +110,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 1
-  m_Range: 10
+  m_Intensity: 4
+  m_Range: 45
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10

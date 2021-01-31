@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Submarine : MonoBehaviour
 {
@@ -16,9 +17,11 @@ public class Submarine : MonoBehaviour
 	private int currentClip = 0;
 	public HUD hudReference;
 
+	private bool gameFinished;
+	private float gameOverTimer;
+
 	[Header("Abilities")]
 	public int SonarPingArtifactNumber;
-	public Transform SonarPingTransform;
 	private Vector3 sonarPingStartSize;
 	public float SonarPingSize;
 	private Vector3 sonarPingFinalSize;
@@ -50,6 +53,19 @@ public class Submarine : MonoBehaviour
 	public float rudderAngle = 30;
 	public AudioSource engineAudio;
 
+	[Header("Sonar")]
+	public Transform ArtifactPyramid;
+	public Transform ArtifactCube;
+	public Transform ArtifactCrystal;
+	public Transform ArtifactSkull;
+	public Transform Castle;
+	public Transform SonarPingTransform;
+	public GameObject SonarMarker1;
+	public GameObject SonarMarker2;
+	public GameObject SonarMarker3;
+	public GameObject SonarMarker4;
+	public GameObject SonarMarker5;
+
 	Vector3 velocity;
 	float yawVelocity;
 	float pitchVelocity;
@@ -59,7 +75,7 @@ public class Submarine : MonoBehaviour
 	void Start()
 	{
 		maxHealth = Health;
-		currentSpeed = maxSpeed;
+		currentSpeed = 5;
 		myRigidBody = GetComponent<Rigidbody>();
 		myInventory = GetComponent<Inventory>();
 
@@ -69,17 +85,39 @@ public class Submarine : MonoBehaviour
 
 	void Update()
 	{
-		UpdateMovement();
-		UpdateSonarPing();
-		UpdateShootTorpedoes();
-		UpdateTooDeep();
-		UpdateHealth();
-		UpdateEngineSound();
-
-		// temp testing
-		if (Input.GetKeyDown(KeyCode.J))
+		if (!gameFinished)
 		{
-			TakeDamage(10f);
+			UpdateMovement();
+			UpdateSonarPing();
+			UpdateShootTorpedoes();
+			UpdateTooDeep();
+			UpdateHealth();
+			UpdateEngineSound();
+		}
+		UpdateGameOver();
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("Castle") && !myInventory.HasArtifact(3))
+		{
+			hudReference.AddDialogue("This is the gate to Atlantis! It seems the door will only open for an Atlantian...", 8f);
+		}
+		else if (other.GetComponent<FinalGate>() != null)
+		{
+			gameFinished = true;
+			gameOverTimer = 65f;
+
+			hudReference.FadeBlack(1.1f, 1f);
+			hudReference.AddDialogue("", 2f);
+			hudReference.AddDialogue("Ah, so this is what happened to Atlantis. How sad...", 8f);
+			hudReference.AddDialogue("They perfected their technology and became an ideal civilization.", 8f);
+			hudReference.AddDialogue("However, fate kept them bound to the sea and they would never set foot on land.", 8f);
+			hudReference.AddDialogue("With no more problems to solve or goals to reach for, a horrible despair cursed the Atlantians.", 8f);
+			hudReference.AddDialogue("They all chose to end their lives rather than live empty ones.", 8f);
+			hudReference.AddDialogue("And now they are but relics to us surface dwellers.", 8f);
+			hudReference.AddDialogue("I can only pray that humanity is spared a similar fate...", 8f);
+			hudReference.AddDialogue("The End. Thanks for playing!", 8f);
 		}
 	}
 
@@ -125,10 +163,10 @@ public class Submarine : MonoBehaviour
 	/// </summary>
 	private void UpdateSonarPing()
 	{
-		//if (!myInventory.HasArtifact(SonarPingArtifactNumber))
-		//{
-		//	return;
-		//}
+		if (!myInventory.HasArtifact(SonarPingArtifactNumber))
+		{
+			return;
+		}
 
 		if (sonarPingTimer > 0f)
 		{
@@ -136,7 +174,12 @@ public class Submarine : MonoBehaviour
 
 			float ratio = sonarPingTimer / SonarPingDuration;
 			ratio = 1f - ratio;
-			SonarPingTransform.localScale = Vector3.Slerp(sonarPingStartSize, sonarPingFinalSize, ratio);
+
+			SonarMarker1.SetActive(ratio >= 0f && ratio < 0.2f);
+			SonarMarker2.SetActive(ratio >= 0.2f && ratio < 0.4f);
+			SonarMarker3.SetActive(ratio >= 0.4f && ratio < 0.6f);
+			SonarMarker4.SetActive(ratio >= 0.6f && ratio < 0.8f);
+			SonarMarker5.SetActive(ratio >= 0.8f && ratio < 1f);
 
 			sonarPingTimer -= Time.deltaTime;
 		}
@@ -148,6 +191,23 @@ public class Submarine : MonoBehaviour
 			{
 				sonarPingTimer = SonarPingDuration;
 				sonarAudio.Play();
+
+				Transform target = ArtifactCrystal;
+				if (ArtifactCrystal == null)
+				{
+					target = ArtifactCube;
+					if (ArtifactCube == null)
+					{
+						target = ArtifactSkull;
+						if (ArtifactSkull == null)
+						{
+							target = Castle;
+						}
+					}
+				}
+
+				Vector3 toTarget = (target.transform.position - transform.position).normalized;
+				SonarPingTransform.rotation = Quaternion.LookRotation(toTarget, Vector3.up);
 			}
 		}
 	}
@@ -157,10 +217,10 @@ public class Submarine : MonoBehaviour
 	/// </summary>
 	private void UpdateShootTorpedoes()
 	{
-		//if (!myInventory.HasArtifact(TorpedoArtifactNumber))
-		//{
-		//	return;
-		//}
+		if (!myInventory.HasArtifact(TorpedoArtifactNumber))
+		{
+			return;
+		}
 
 		if (Input.GetKeyDown(KeyCode.Space) && torpedoCooldownTimer <= 0f)
 		{
@@ -183,10 +243,10 @@ public class Submarine : MonoBehaviour
 	/// </summary>
 	private void UpdateTooDeep()
 	{
-		//if (myInventory.HasArtifact(DeepWaterArtifactNumber))
-		//{
-		//	return;
-		//}
+		if (myInventory.HasArtifact(DeepWaterArtifactNumber))
+		{
+			return;
+		}
 
 		if (transform.position.y < DeepWaterDepth)
 		{
@@ -194,7 +254,7 @@ public class Submarine : MonoBehaviour
 
 			if (hudReference.DialogueEmpty())
 			{
-				hudReference.AddDialogue("WARNING: Water pressure too great at this depth.");
+				hudReference.AddDialogue("WARNING: Water pressure too great at this depth.", 2f);
 			}
 		}
 	}
@@ -212,7 +272,27 @@ public class Submarine : MonoBehaviour
 
 		if (Health <= 0f)
 		{
-			// todo - game over
+			gameFinished = true;
+			gameOverTimer = 8f;
+
+			hudReference.FadeBlack(1.1f, 1f);
+			hudReference.AddDialogue("", 1f);
+			hudReference.AddDialogue("We're taking on water, we're finished... It seems the sea floor will be our tomb.", 6f);
+		}
+	}
+
+	/// <summary>
+	/// If the game is finished, begin counting down. Once all the way, load the main menu scene.
+	/// </summary>
+	private void UpdateGameOver()
+	{
+		if (gameFinished)
+		{
+			gameOverTimer -= Time.deltaTime;
+			if (gameOverTimer < 0f)
+			{
+				SceneManager.LoadScene("MainMenu");
+			}
 		}
 	}
 

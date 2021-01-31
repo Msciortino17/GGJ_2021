@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: d5b1666dfc48c464bacba9df6bdb3ec4
+  - enabled: 1
+    path: Assets/Scenes/Underwater.unity
+    guid: 408a4bbe1d57696498c92343434bcdf7
   m_configObjects: {}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SharkBite : MonoBehaviour
 {
-    public float Damage = 10.0f;
+    public float Damage = 30.0f;
 
     private void OnTriggerEnter(Collider other) {
         Submarine submarine = other.GetComponent<Submarine>();

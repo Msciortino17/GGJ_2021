@@ -8,23 +8,27 @@ public class SharkNest : MonoBehaviour
 
     public Transform SpawnPoint;
 
+    public float Radius = 50.0f;
+
     public int SharksInNest = 3;
 
     public float SpawnRate_sec = 5;
 
     private void Update()
     {
-        if(SubmarineDetected && SharksSpawned < SharksInNest /* && TimerToPrevent Sharks*/)
+        if(SubmarineDetected)
         {
-            Timer.Interval();
-            if( Timer.Seconds > SpawnRate_sec || SharksSpawned == 0 )
+            if(SharksSpawned < SharksInNest)
             {
-                SpawnShark();
-                Timer.Reset();
+                Timer.Interval();
+                if( Timer.Seconds > SpawnRate_sec || SharksSpawned == 0 )
+                {
+                    SpawnShark();
+                    Timer.Reset();
+                }
             }
         }
-
-        if( !SubmarineDetected )
+        else
         {
             Timer.Reset();
         }
@@ -35,11 +39,17 @@ public class SharkNest : MonoBehaviour
     /// </summary>
     private void SpawnShark()
     {
-            Shark shark = Instantiate(SharkPrefab, SpawnPoint.position, new Quaternion()).GetComponent<Shark>();
+        Vector3 toPlayer = SpawnPoint.forward;
+        if(Submarine != null) toPlayer = Submarine.transform.position - transform.position; 
 
-            if( Submarine != null ) shark.Target = Submarine;
+        Shark shark = Instantiate(SharkPrefab, SpawnPoint.position, Quaternion.LookRotation(toPlayer, Vector3.up)).GetComponent<Shark>();
 
-            SharksSpawned++;
+        shark.SetSharkNest(this);
+        shark.SetPlayer(Submarine);
+        shark.SetState(Shark.SharkState.Aggro);
+        shark.SetRadius( Radius );
+
+        SharksSpawned++;
     }
 
     private void OnTriggerEnter(Collider other)

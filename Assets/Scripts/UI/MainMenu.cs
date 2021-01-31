@@ -7,6 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+	private bool knowsHowToPlay;
+	private const string knowsHowToPlayKey = "knowsHowToPlay";
+
+	public GameObject PlayButton;
+
 	public GameObject TitleMenu;
 	public GameObject HowToPlayMenu;
 	public GameObject OptionsMenu;
@@ -23,6 +28,11 @@ public class MainMenu : MonoBehaviour
 	void Start()
 	{
 		InitAudio();
+		knowsHowToPlay = PlayerPrefs.GetInt(knowsHowToPlayKey, 0) == 1;
+		if (PlayButton != null)
+		{
+			PlayButton.SetActive(knowsHowToPlay);
+		}
 	}
 
 	/// <summary>
@@ -44,8 +54,14 @@ public class MainMenu : MonoBehaviour
 		}
 		MasterMixer.SetFloat("MusicVolume", musicVolume);
 
-		EffectSlider.value = effectVolume;
-		MusicSlider.value = musicVolume;
+		if (EffectSlider != null)
+		{
+			EffectSlider.value = effectVolume;
+		}
+		if (MusicSlider != null)
+		{
+			MusicSlider.value = musicVolume;
+		}
 	}
 
 	// Update is called once per frame
@@ -59,7 +75,7 @@ public class MainMenu : MonoBehaviour
 	/// </summary>
 	public void PlayGame()
 	{
-		//SceneManager.LoadScene("todo");
+		SceneManager.LoadScene("Underwater");
 	}
 
 	/// <summary>
@@ -69,6 +85,10 @@ public class MainMenu : MonoBehaviour
 	{
 		TitleMenu.SetActive(false);
 		HowToPlayMenu.SetActive(true);
+
+		knowsHowToPlay = true;
+		PlayerPrefs.SetInt(knowsHowToPlayKey, knowsHowToPlay ? 1 : 0);
+		PlayButton.SetActive(knowsHowToPlay);
 	}
 
 	/// <summary>
