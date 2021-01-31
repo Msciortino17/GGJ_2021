@@ -68,7 +68,6 @@ public class Tentacle : MonoBehaviour
             if( AttackTimer.Seconds > AttackRate && !Attacking )
             {
                 Attacking = true;
-                // Play sound?
             }
         }
         else
@@ -83,6 +82,7 @@ public class Tentacle : MonoBehaviour
             {
                 if( CooldownTimer.Seconds >= DamageCooldown )
                 {
+                    // Play sound?
                     submarine.GetComponent<Submarine>()?.TakeDamage( Damage );
                     CooldownTimer.Reset();
                 }
